@@ -8,11 +8,8 @@ import Stopwatch from "./Stopwatch";
 
 export default function Projects({
   projects,
-  times,
   onDeleteProject,
   onUpdateProjectName,
-  editing,
-  toggleEditing,
   editId,
   onChangeEditId,
   showPopup,
@@ -70,7 +67,20 @@ export default function Projects({
           {stopwatch === project.id && (
             <Stopwatch project={project} onAddTime={onAddTime} />
           )}
-
+          {project.times.map((time) => (
+            <div key={time.id}>
+              <span>{time.description}: </span>
+              <span>
+                {("0" + Math.floor((time.time / 3600000) % 60)).slice(-2)}:
+              </span>
+              <span>
+                {("0" + Math.floor((time.time / 60000) % 60)).slice(-2)}:
+              </span>
+              <span>
+                {("0" + Math.floor((time.time / 1000) % 60)).slice(-2)}
+              </span>
+            </div>
+          ))}
           <section>
             <button type="button" onClick={() => onDeleteProject(project.id)}>
               <IoMdTrash fontSize="5vh" color={project.textColour} />

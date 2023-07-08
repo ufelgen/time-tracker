@@ -7,17 +7,10 @@ function MyApp({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  const [times, setTimes] = useLocalStorageState("times", { defaultValue: [] });
-
-  const [editing, setEditing] = useState(false);
   const [editId, setEditId] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [showPopup, setShowPopup] = useState("");
   const [stopwatch, setStopwatch] = useState(false);
-
-  function toggleEditing() {
-    setEditing(!editing);
-  }
 
   function handleChangeEditId(editId) {
     setEditId(editId);
@@ -41,8 +34,6 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyles />
       <Component
         {...pageProps}
-        editing={editing}
-        toggleEditing={toggleEditing}
         showForm={showForm}
         toggleShowForm={toggleShowForm}
         editId={editId}

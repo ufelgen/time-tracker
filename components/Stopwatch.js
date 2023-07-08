@@ -46,15 +46,12 @@ export default function Stopwatch({ project, onAddTime }) {
     event.preventDefault();
 
     const newEntry = {
-      id: project.id,
-      project: project.name,
-      times: [
-        {
-          id: nanoid(),
-          time: time,
-          description: event.target.elements.description.value,
-        },
-      ],
+      projectName: project.name,
+      timeObject: {
+        id: nanoid(),
+        time: time,
+        description: event.target.elements.description.value,
+      },
     };
 
     onAddTime(newEntry);

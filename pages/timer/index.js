@@ -7,8 +7,6 @@ import Projects from "../../components/Projects";
 import { nanoid } from "nanoid";
 
 export default function Timer({
-  editing,
-  toggleEditing,
   editId,
   onChangeEditId,
   showForm,
@@ -20,11 +18,6 @@ export default function Timer({
 }) {
   const [projects, setProjects] = useLocalStorageState("projects");
   if (!projects) {
-    return null;
-  }
-
-  const [times, setTimes] = useLocalStorageState("times");
-  if (!times) {
     return null;
   }
 
@@ -48,27 +41,25 @@ export default function Timer({
   }
 
   function handleAddTime(newEntry) {
-    const timeEntryToUpdate = times.find(
-      (time) => time.project === newEntry.project
+    const projectEntryToUpdate = projects.find(
+      (project) => project.name === newEntry.projectName
     );
-
-    if (timeEntryToUpdate) {
-      const updatedTimeEntry = {
-        ...timeEntryToUpdate,
-        times: [...timeEntryToUpdate.times, newEntry.times[0]],
+    console.log("projectEntryToUpdate", projectEntryToUpdate);
+    if (projectEntryToUpdate) {
+      const updatedEntry = {
+        ...projectEntryToUpdate,
+        times: [...projectEntryToUpdate.times, newEntry.timeObject],
       };
-      setTimes(
-        times.map((time) =>
-          time.project === newEntry.project ? updatedTimeEntry : time
+      setProjects(
+        projects.map((project) =>
+          project.name === newEntry.projectName ? updatedEntry : project
         )
       );
       console.log("i am in if");
     } else {
-      setTimes([...times, newEntry]);
       console.log("i am in else");
+      return;
     }
-
-    console.log("times", times);
   }
   return (
     <BaseMain>
@@ -83,11 +74,8 @@ export default function Timer({
       )}
       <Projects
         projects={projects}
-        times={times}
         onDeleteProject={handleDeleteProject}
         onUpdateProjectName={handleUpdateProjectName}
-        editing={editing}
-        toggleEditing={toggleEditing}
         editId={editId}
         onChangeEditId={onChangeEditId}
         showPopup={showPopup}

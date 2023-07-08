@@ -23,6 +23,7 @@ export default function NewProjectForm({ toggleShowForm, onAddNewProject }) {
       name: projectName,
       backgroundColour: projectColour,
       textColour: textColour,
+      times: [],
     };
     onAddNewProject(newProject);
     toggleShowForm();
