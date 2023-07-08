@@ -4,6 +4,7 @@ import { BaseMain } from "../../components/AllStyles";
 import { AiFillPlusCircle } from "react-icons/ai";
 import NewProjectForm from "../../components/NewProjectForm";
 import Projects from "../../components/Projects";
+import { nanoid } from "nanoid";
 
 export default function Timer({
   editing,
@@ -22,10 +23,10 @@ export default function Timer({
     return null;
   }
 
-  /*   const [times, setTimes] = useLocalStorageState("times");
+  const [times, setTimes] = useLocalStorageState("times");
   if (!times) {
     return null;
-  } */
+  }
 
   function handleAddProject(newProject) {
     setProjects([...projects, newProject]);
@@ -45,6 +46,30 @@ export default function Timer({
       )
     );
   }
+
+  function handleAddTime(newEntry) {
+    const timeEntryToUpdate = times.find(
+      (time) => time.project === newEntry.project
+    );
+
+    if (timeEntryToUpdate) {
+      const updatedTimeEntry = {
+        ...timeEntryToUpdate,
+        times: [...timeEntryToUpdate.times, newEntry.times[0]],
+      };
+      setTimes(
+        times.map((time) =>
+          time.project === newEntry.project ? updatedTimeEntry : time
+        )
+      );
+      console.log("i am in if");
+    } else {
+      setTimes([...times, newEntry]);
+      console.log("i am in else");
+    }
+
+    console.log("times", times);
+  }
   return (
     <BaseMain>
       <StyledAddButton onClick={toggleShowForm}>
@@ -58,6 +83,7 @@ export default function Timer({
       )}
       <Projects
         projects={projects}
+        times={times}
         onDeleteProject={handleDeleteProject}
         onUpdateProjectName={handleUpdateProjectName}
         editing={editing}
@@ -68,6 +94,7 @@ export default function Timer({
         onShowPopup={onShowPopup}
         stopwatch={stopwatch}
         onShowStopwatch={onShowStopwatch}
+        onAddTime={handleAddTime}
       />
     </BaseMain>
   );

@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import { IoMdTrash } from "react-icons/io";
 import { BiEdit } from "react-icons/bi";
-import { AiFillPlusCircle, AiFillCheckCircle } from "react-icons/ai";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 import NewTimePopup from "./NewTimePopup";
 import Stopwatch from "./Stopwatch";
 
 export default function Projects({
   projects,
+  times,
   onDeleteProject,
   onUpdateProjectName,
   editing,
@@ -17,6 +19,7 @@ export default function Projects({
   onShowPopup,
   stopwatch,
   onShowStopwatch,
+  onAddTime,
 }) {
   if (!projects) {
     return null;
@@ -53,7 +56,7 @@ export default function Projects({
                     defaultValue={project.name}
                   />
                   <button type="submit">
-                    <AiFillCheckCircle
+                    <BsFillCheckCircleFill
                       fontSize="5vh"
                       color={project.textColour}
                     />
@@ -64,7 +67,10 @@ export default function Projects({
               <h2>{project?.name}</h2>
             )}
           </div>
-          {stopwatch === project.id && <Stopwatch project={project} />}
+          {stopwatch === project.id && (
+            <Stopwatch project={project} onAddTime={onAddTime} />
+          )}
+
           <section>
             <button type="button" onClick={() => onDeleteProject(project.id)}>
               <IoMdTrash fontSize="5vh" color={project.textColour} />

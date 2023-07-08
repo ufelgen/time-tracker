@@ -4,12 +4,15 @@ import {
   BsPauseCircleFill,
   BsFillPlayCircleFill,
   BsStopCircleFill,
+  BsFillArrowLeftCircleFill,
+  BsFillCheckCircleFill,
 } from "react-icons/bs";
-import { set } from "date-fns";
+import { nanoid } from "nanoid";
 
-export default function Stopwatch({ project }) {
+export default function Stopwatch({ project, onAddTime }) {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
+  const [saveEntry, setSaveEntry] = useState(false);
 
   useEffect(() => {
     let interval;
@@ -23,8 +26,6 @@ export default function Stopwatch({ project }) {
     return () => clearInterval(interval);
   }, [running]);
 
-  console.log(time);
-
   function startTimer() {
     setRunning(true);
     console.log("timer started");
@@ -33,11 +34,32 @@ export default function Stopwatch({ project }) {
   function stopTimer() {
     setRunning(false);
     console.log("timer stopped");
+    setSaveEntry(true);
   }
 
   function pauseTimer() {
     setRunning(false);
     console.log("timer paused");
+  }
+
+  function handleSaveEntry(event, project) {
+    event.preventDefault();
+
+    const newEntry = {
+      id: project.id,
+      project: project.name,
+      times: [
+        {
+          id: nanoid(),
+          time: time,
+          description: event.target.elements.description.value,
+        },
+      ],
+    };
+
+    onAddTime(newEntry);
+    setSaveEntry(false);
+    setTime(0);
   }
 
   return (
@@ -54,23 +76,48 @@ export default function Stopwatch({ project }) {
         </span>
       </div>
       <div>
-        <button type="button" onClick={pauseTimer}>
-          <BsPauseCircleFill fontSize="5vh" color={project.textColour} />
-        </button>
-        <button type="button">
-          <BsFillPlayCircleFill
-            onClick={startTimer}
-            fontSize="5vh"
-            color={project.textColour}
-          />
-        </button>
-        <button type="button">
-          <BsStopCircleFill
-            onClick={stopTimer}
-            fontSize="5vh"
-            color={project.textColour}
-          />
-        </button>
+        {saveEntry ? (
+          <form onSubmit={(event) => handleSaveEntry(event, project)}>
+            <label htmlFor="description"></label>
+            <input
+              name="description"
+              id="description"
+              placeholder="Beschreibung"
+            />
+            <button type="button" onClick={() => setSaveEntry(false)}>
+              <BsFillArrowLeftCircleFill
+                fontSize="5vh"
+                color={project.textColour}
+              />
+            </button>
+            <button type="submit">
+              <BsFillCheckCircleFill
+                fontSize="5vh"
+                color={project.textColour}
+              />
+            </button>
+          </form>
+        ) : (
+          <>
+            <button type="button" onClick={pauseTimer}>
+              <BsPauseCircleFill fontSize="5vh" color={project.textColour} />
+            </button>
+            <button type="button">
+              <BsFillPlayCircleFill
+                onClick={startTimer}
+                fontSize="5vh"
+                color={project.textColour}
+              />
+            </button>
+            <button type="button">
+              <BsStopCircleFill
+                onClick={stopTimer}
+                fontSize="5vh"
+                color={project.textColour}
+              />
+            </button>
+          </>
+        )}
       </div>
     </StopwatchContainer>
   );
