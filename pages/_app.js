@@ -12,6 +12,8 @@ function MyApp({ Component, pageProps }) {
   const [editing, setEditing] = useState(false);
   const [editId, setEditId] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [showPopup, setShowPopup] = useState("");
+  const [stopwatch, setStopwatch] = useState(false);
 
   function toggleEditing() {
     setEditing(!editing);
@@ -19,11 +21,21 @@ function MyApp({ Component, pageProps }) {
 
   function handleChangeEditId(editId) {
     setEditId(editId);
+    console.log(editId);
   }
 
   function toggleShowForm() {
     setShowForm(!showForm);
   }
+
+  function handleShowPopup(popupId) {
+    setShowPopup(popupId);
+  }
+
+  function handleShowStopwatch(stopwatchId) {
+    setStopwatch(stopwatchId);
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -33,7 +45,12 @@ function MyApp({ Component, pageProps }) {
         toggleEditing={toggleEditing}
         showForm={showForm}
         toggleShowForm={toggleShowForm}
+        editId={editId}
         onChangeEditId={handleChangeEditId}
+        showPopup={showPopup}
+        onShowPopup={handleShowPopup}
+        stopwatch={stopwatch}
+        onShowStopwatch={handleShowStopwatch}
       />
     </>
   );

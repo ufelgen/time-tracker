@@ -1,17 +1,35 @@
 import styled from "styled-components";
 import { IoMdTrash } from "react-icons/io";
 import { BiEdit } from "react-icons/bi";
-import {
-  BsFillPlayCircleFill,
-  BsPauseCircleFill,
-  BsStopCircleFill,
-} from "react-icons/bs";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiFillCheckCircle } from "react-icons/ai";
+import NewTimePopup from "./NewTimePopup";
+import Stopwatch from "./Stopwatch";
 
-export default function Projects({ projects }) {
+export default function Projects({
+  projects,
+  onDeleteProject,
+  onUpdateProjectName,
+  editing,
+  toggleEditing,
+  editId,
+  onChangeEditId,
+  showPopup,
+  onShowPopup,
+  stopwatch,
+  onShowStopwatch,
+}) {
   if (!projects) {
     return null;
   }
+
+  function handleEditProject(event, projectId) {
+    event.preventDefault();
+
+    const newProjectName = event.target.elements.projectName.value;
+    onUpdateProjectName(newProjectName, projectId);
+    onChangeEditId("");
+  }
+
   return (
     <ProjectsContainer>
       {projects.map((project) => (
@@ -22,30 +40,53 @@ export default function Projects({ projects }) {
             color: project?.textColour,
           }}
         >
-          <h2>{project?.name}</h2>
-          <div>
-            <button type="button">
-              <IoMdTrash font-size="5vh" color={project.textColour} />
-            </button>
-            <button type="button">
-              <BiEdit font-size="5vh" color={project.textColour} />
-            </button>
-            <button type="button">
-              <AiFillPlusCircle font-size="5vh" color={project.textColour} />
-            </button>
-            <button type="button">
-              <BsPauseCircleFill font-size="5vh" color={project.textColour} />
-            </button>{" "}
-            <button type="button">
-              <BsFillPlayCircleFill
-                font-size="5vh"
-                color={project.textColour}
-              />
-            </button>{" "}
-            <button type="button">
-              <BsStopCircleFill font-size="5vh" color={project.textColour} />
-            </button>
+          <div className="fixedHeight">
+            {editId === project.id ? (
+              <EditNameForm
+                onSubmit={(event) => handleEditProject(event, project.id)}
+              >
+                <>
+                  <label htmlFor="projectName"></label>
+                  <input
+                    name="projectName"
+                    id="projectName"
+                    defaultValue={project.name}
+                  />
+                  <button type="submit">
+                    <AiFillCheckCircle
+                      fontSize="5vh"
+                      color={project.textColour}
+                    />
+                  </button>
+                </>
+              </EditNameForm>
+            ) : (
+              <h2>{project?.name}</h2>
+            )}
           </div>
+          {stopwatch === project.id && <Stopwatch project={project} />}
+          <section>
+            <button type="button" onClick={() => onDeleteProject(project.id)}>
+              <IoMdTrash fontSize="5vh" color={project.textColour} />
+            </button>
+            <button
+              type="button"
+              onClick={() => onChangeEditId(project?.id)}
+              disabled={editId === project.id}
+            >
+              <BiEdit fontSize="5vh" color={project.textColour} />
+            </button>
+            <button type="button" onClick={() => onShowPopup(project.id)}>
+              <AiFillPlusCircle fontSize="5vh" color={project.textColour} />
+            </button>
+            {showPopup === project.id && (
+              <NewTimePopup
+                onShowStopwatch={onShowStopwatch}
+                onShowPopup={onShowPopup}
+                project={project}
+              />
+            )}
+          </section>
         </article>
       ))}
     </ProjectsContainer>
@@ -61,17 +102,23 @@ const ProjectsContainer = styled.section`
 
   article {
     margin: 0.5rem;
+    border-radius: 5px;
 
     h2 {
       padding: 0.5rem;
     }
   }
 
-  div {
+  .fixedHeigt {
+    height: 4rem;
+  }
+
+  section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 
     button {
       height: 5vh;
@@ -79,5 +126,22 @@ const ProjectsContainer = styled.section`
       border: none;
       margin: 5px;
     }
+  }
+`;
+
+const EditNameForm = styled.form`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 0.5rem;
+
+  input {
+    height: 5vh;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    margin: 5px;
   }
 `;

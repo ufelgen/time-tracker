@@ -7,20 +7,43 @@ import Projects from "../../components/Projects";
 
 export default function Timer({
   editing,
-  onChangeEditId,
   toggleEditing,
+  editId,
+  onChangeEditId,
   showForm,
   toggleShowForm,
+  showPopup,
+  onShowPopup,
+  stopwatch,
+  onShowStopwatch,
 }) {
   const [projects, setProjects] = useLocalStorageState("projects");
   if (!projects) {
     return null;
   }
 
-  const [times, setTimes] = useLocalStorageState("times");
+  /*   const [times, setTimes] = useLocalStorageState("times");
+  if (!times) {
+    return null;
+  } */
 
   function handleAddProject(newProject) {
     setProjects([...projects, newProject]);
+  }
+
+  function handleDeleteProject(projectId) {
+    const confirmation = confirm("Möchtest du dieses Projekt löschen?");
+    if (confirmation) {
+      setProjects(projects.filter((project) => project.id !== projectId));
+    }
+  }
+
+  function handleUpdateProjectName(updatedName, projectId) {
+    setProjects(
+      projects.map((project) =>
+        project.id === projectId ? { ...project, name: updatedName } : project
+      )
+    );
   }
   return (
     <BaseMain>
@@ -33,7 +56,19 @@ export default function Timer({
           onAddNewProject={handleAddProject}
         />
       )}
-      <Projects projects={projects} />
+      <Projects
+        projects={projects}
+        onDeleteProject={handleDeleteProject}
+        onUpdateProjectName={handleUpdateProjectName}
+        editing={editing}
+        toggleEditing={toggleEditing}
+        editId={editId}
+        onChangeEditId={onChangeEditId}
+        showPopup={showPopup}
+        onShowPopup={onShowPopup}
+        stopwatch={stopwatch}
+        onShowStopwatch={onShowStopwatch}
+      />
     </BaseMain>
   );
 }
