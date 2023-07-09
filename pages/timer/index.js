@@ -62,6 +62,25 @@ export default function Timer({
       return;
     }
   }
+
+  function handleDeleteTime(timeId, projectId) {
+    const confirmation = confirm("Möchtest du diesen Eintrag löschen?");
+    const currentProject = projects.find((project) => project.id === projectId);
+
+    const updatedTimesInProject = currentProject.times.filter(
+      (time) => time.id !== timeId
+    );
+
+    if (confirmation) {
+      setProjects(
+        projects.map((project) =>
+          project.id === projectId
+            ? { ...project, times: updatedTimesInProject }
+            : project
+        )
+      );
+    }
+  }
   return (
     <BaseMain>
       <StyledAddButton onClick={toggleShowForm}>
@@ -86,6 +105,7 @@ export default function Timer({
         newTimeForm={newTimeForm}
         onShowNewTimeForm={onShowNewTimeForm}
         onAddTime={handleAddTime}
+        onDeleteTime={handleDeleteTime}
       />
     </BaseMain>
   );

@@ -20,6 +20,7 @@ export default function Projects({
   newTimeForm,
   onShowNewTimeForm,
   onAddTime,
+  onDeleteTime,
 }) {
   if (!projects) {
     return null;
@@ -82,6 +83,19 @@ export default function Projects({
               <span>
                 {("0" + Math.floor((time.time / 1000) % 60)).slice(-2)}
               </span>
+              <span>
+                <button
+                  type="button"
+                  onClick={() => onDeleteTime(time.id, project.id)}
+                >
+                  <IoMdTrash fontSize="3vh" color={project.textColour} />
+                </button>
+              </span>
+              <span>
+                <button type="button">
+                  <BiEdit fontSize="3vh" color={project.textColour} />
+                </button>
+              </span>
             </div>
           ))}
           {newTimeForm === project.id && (
@@ -135,6 +149,16 @@ const ProjectsContainer = styled.section`
 
     h2 {
       padding: 0.5rem;
+    }
+
+    div {
+      span {
+        button {
+          background-color: transparent;
+          border: none;
+          margin: 5px;
+        }
+      }
     }
   }
 
