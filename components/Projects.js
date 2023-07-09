@@ -40,7 +40,7 @@ export default function Projects({
 
   return (
     <ProjectsContainer>
-      <h2>Heute ist der {today}</h2>
+      <h1>Heute ist der {today}</h1>
       {projects.map((project) => (
         <article
           key={project?.id}
@@ -70,7 +70,7 @@ export default function Projects({
                 </>
               </EditNameForm>
             ) : (
-              <h2>{project?.name}</h2>
+              <h2 color={project.textColour}>{project?.name}</h2>
             )}
           </div>
           {stopwatch === project.id && (
