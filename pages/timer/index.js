@@ -120,6 +120,15 @@ export default function Timer({
       );
       handleCelebration();
     }
+
+    if (showForm) {
+      toggleShowForm();
+    }
+    onChangeEditId(0);
+    onShowPopup(0);
+    onShowStopwatch(0);
+    onShowNewTimeForm(0);
+    onChangeEditTimeId(0);
   }
 
   const { height, width } = dynamic(

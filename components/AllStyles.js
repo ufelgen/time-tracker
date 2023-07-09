@@ -40,6 +40,7 @@ export const StyledForm = styled.form`
 
   input {
     width: 90%;
+    margin: 0.5rem !important;
   }
 
   button {
@@ -48,6 +49,6 @@ export const StyledForm = styled.form`
     border: none;
     border-radius: 5px;
     padding: 0.5rem;
-    margin: 0.5rem;
+    margin: 0.5rem !important;
   }
 `;
