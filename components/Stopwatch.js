@@ -8,10 +8,13 @@ import {
   BsFillCheckCircleFill,
 } from "react-icons/bs";
 import { nanoid } from "nanoid";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function Stopwatch({ project, onAddTime }) {
-  const [time, setTime] = useState(0);
-  const [running, setRunning] = useState(false);
+  const [time, setTime] = useLocalStorageState("time", { defaultValue: 0 });
+  const [running, setRunning] = useLocalStorageState("running", {
+    defaultValue: false,
+  });
   const [saveEntry, setSaveEntry] = useState(false);
 
   useEffect(() => {
