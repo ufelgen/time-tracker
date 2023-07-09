@@ -11,10 +11,8 @@ import { nanoid } from "nanoid";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function Stopwatch({ project, onAddTime }) {
-  const [time, setTime] = useLocalStorageState("time", { defaultValue: 0 });
-  const [running, setRunning] = useLocalStorageState("running", {
-    defaultValue: false,
-  });
+  const [time, setTime] = useLocalStorageState("time");
+  const [running, setRunning] = useLocalStorageState("running");
   const [saveEntry, setSaveEntry] = useState(false);
 
   useEffect(() => {
