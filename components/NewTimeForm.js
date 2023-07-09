@@ -2,7 +2,18 @@ import styled from "styled-components";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { nanoid } from "nanoid";
 
-export default function NewTimeForm({ project, onAddTime, onShowNewTimeForm }) {
+export default function NewTimeForm({
+  project,
+  onAddTime,
+  onShowNewTimeForm,
+  time = {},
+  onChangeEditTimeId,
+  onEditTime,
+  editTimeId,
+}) {
+  const timeHours = ("0" + Math.floor((time.time / 3600000) % 60)).slice(-2);
+  const timeMinutes = ("0" + Math.floor((time.time / 60000) % 60)).slice(-2);
+
   function addTimeManually(event, project) {
     event.preventDefault();
     const hours = event.target.elements.hours.value;
@@ -18,20 +29,41 @@ export default function NewTimeForm({ project, onAddTime, onShowNewTimeForm }) {
       },
     };
 
-    onAddTime(newEntry);
-    onShowNewTimeForm(0);
+    if (time.id !== editTimeId) {
+      onAddTime(newEntry);
+      onShowNewTimeForm(0);
+      console.log("i am in if in NewTimeForm");
+    } else {
+      onEditTime(time.id, newEntry);
+      onChangeEditTimeId(0);
+      console.log("i am in else in NewTimeForm");
+    }
   }
   return (
     <AddTimeManuallyForm onSubmit={(event) => addTimeManually(event, project)}>
       <label htmlFor="description">Beschreibung: </label>
-      <input name="description" id="description" className="spanTwo" required />
+      <input
+        name="description"
+        id="description"
+        className="spanTwo"
+        defaultValue={time?.description}
+        required
+      />
       <label htmlFor="hours">Zeit: </label>
-      <input type="number" name="hours" id="hours" placeholder="HH" required />
+      <input
+        type="number"
+        name="hours"
+        id="hours"
+        placeholder="HH"
+        defaultValue={timeHours}
+        required
+      />
       <input
         type="number"
         name="minutes"
         id="minutes"
         placeholder="MM"
+        defaultValue={timeMinutes}
         required
       />
       <div>

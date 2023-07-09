@@ -21,6 +21,9 @@ export default function Projects({
   onShowNewTimeForm,
   onAddTime,
   onDeleteTime,
+  editTimeId,
+  onChangeEditTimeId,
+  onEditTime,
 }) {
   if (!projects) {
     return null;
@@ -73,29 +76,48 @@ export default function Projects({
           )}
           {project.times.map((time) => (
             <div key={time.id}>
-              <span>{time.description}: </span>
-              <span>
-                {("0" + Math.floor((time.time / 3600000) % 60)).slice(-2)}:
-              </span>
-              <span>
-                {("0" + Math.floor((time.time / 60000) % 60)).slice(-2)}:
-              </span>
-              <span>
-                {("0" + Math.floor((time.time / 1000) % 60)).slice(-2)}
-              </span>
-              <span>
-                <button
-                  type="button"
-                  onClick={() => onDeleteTime(time.id, project.id)}
-                >
-                  <IoMdTrash fontSize="3vh" color={project.textColour} />
-                </button>
-              </span>
-              <span>
-                <button type="button">
-                  <BiEdit fontSize="3vh" color={project.textColour} />
-                </button>
-              </span>
+              {time.id === editTimeId ? (
+                <>
+                  <NewTimeForm
+                    project={project}
+                    onAddTime={onAddTime}
+                    onShowNewTimeForm={onShowNewTimeForm}
+                    time={time}
+                    onChangeEditTimeId={onChangeEditTimeId}
+                    onEditTime={onEditTime}
+                    editTimeId={editTimeId}
+                  />
+                </>
+              ) : (
+                <>
+                  <span>{time.description}: </span>
+                  <span>
+                    {("0" + Math.floor((time.time / 3600000) % 60)).slice(-2)}:
+                  </span>
+                  <span>
+                    {("0" + Math.floor((time.time / 60000) % 60)).slice(-2)}:
+                  </span>
+                  <span>
+                    {("0" + Math.floor((time.time / 1000) % 60)).slice(-2)}
+                  </span>
+                  <span>
+                    <button
+                      type="button"
+                      onClick={() => onDeleteTime(time.id, project.id)}
+                    >
+                      <IoMdTrash fontSize="3vh" color={project.textColour} />
+                    </button>
+                  </span>
+                  <span>
+                    <button
+                      type="button"
+                      onClick={() => onChangeEditTimeId(time.id)}
+                    >
+                      <BiEdit fontSize="3vh" color={project.textColour} />
+                    </button>
+                  </span>
+                </>
+              )}
             </div>
           ))}
           {newTimeForm === project.id && (
@@ -103,6 +125,9 @@ export default function Projects({
               project={project}
               onAddTime={onAddTime}
               onShowNewTimeForm={onShowNewTimeForm}
+              onChangeEditTimeId={onChangeEditTimeId}
+              onEditTime={onEditTime}
+              editTimeId={editTimeId}
             />
           )}
           <section>

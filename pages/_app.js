@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   const [showPopup, setShowPopup] = useState("");
   const [stopwatch, setStopwatch] = useState(0);
   const [newTimeForm, setNewTimeForm] = useState(0);
+  const [editTimeId, setEditTimeId] = useState(0);
 
   function handleChangeEditId(editId) {
     setEditId(editId);
@@ -30,8 +31,13 @@ function MyApp({ Component, pageProps }) {
     setStopwatch(stopwatchId);
   }
 
-  function handleShowNewTimeForm(stopwatchId) {
-    setNewTimeForm(stopwatchId);
+  function handleShowNewTimeForm(newTimeFormId) {
+    setNewTimeForm(newTimeFormId);
+  }
+
+  function handleChangeEditTimeId(timeId) {
+    setEditTimeId(timeId);
+    console.log("huhu", timeId);
   }
 
   return (
@@ -49,6 +55,8 @@ function MyApp({ Component, pageProps }) {
         onShowStopwatch={handleShowStopwatch}
         onShowNewTimeForm={handleShowNewTimeForm}
         newTimeForm={newTimeForm}
+        editTimeId={editTimeId}
+        onChangeEditTimeId={handleChangeEditTimeId}
       />
     </>
   );

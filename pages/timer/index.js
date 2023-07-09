@@ -16,6 +16,8 @@ export default function Timer({
   onShowStopwatch,
   newTimeForm,
   onShowNewTimeForm,
+  editTimeId,
+  onChangeEditTimeId,
 }) {
   const [projects, setProjects] = useLocalStorageState("projects");
   if (!projects) {
@@ -81,6 +83,24 @@ export default function Timer({
       );
     }
   }
+
+  function handleEditTime(timeId, updatedEntry) {
+    const currentProject = projects.find(
+      (project) => project.name === updatedEntry.projectName
+    );
+
+    const updatedTimesInProject = currentProject.times.map((time) =>
+      time.id === timeId ? updatedEntry.timeObject : time
+    );
+
+    setProjects(
+      projects.map((project) =>
+        project.name === updatedEntry.projectName
+          ? { ...project, times: updatedTimesInProject }
+          : project
+      )
+    );
+  }
   return (
     <BaseMain>
       <StyledAddButton onClick={toggleShowForm}>
@@ -106,6 +126,9 @@ export default function Timer({
         onShowNewTimeForm={onShowNewTimeForm}
         onAddTime={handleAddTime}
         onDeleteTime={handleDeleteTime}
+        editTimeId={editTimeId}
+        onChangeEditTimeId={onChangeEditTimeId}
+        onEditTime={handleEditTime}
       />
     </BaseMain>
   );
