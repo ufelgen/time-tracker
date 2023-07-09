@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { GiSandsOfTime } from "react-icons/gi";
 import { BsPencilFill } from "react-icons/bs";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function NewTimePopup({
   onShowStopwatch,
@@ -8,9 +9,18 @@ export default function NewTimePopup({
   onShowNewTimeForm,
   project,
 }) {
+  const [running] = useLocalStorageState("running");
+  const [time] = useLocalStorageState("time");
+
   function showStopwatch(stopwatchId) {
-    onShowStopwatch(stopwatchId);
-    onShowPopup("");
+    if (running || (!running && time !== 0)) {
+      alert(
+        "Es läuft bereits ein Timer. Bitte schließe dein laufendes Projekt erst ab, bevor du ein neues startest."
+      );
+    } else {
+      onShowStopwatch(stopwatchId);
+      onShowPopup("");
+    }
   }
 
   function inputTimeManually(addTimeId) {
