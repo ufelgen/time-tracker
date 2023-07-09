@@ -6,6 +6,10 @@ function MyApp({ Component, pageProps }) {
   const [projects, setProjects] = useLocalStorageState("projects", {
     defaultValue: [],
   });
+  const [time, setTime] = useLocalStorageState("time", { defaultValue: 0 });
+  const [running, setRunning] = useLocalStorageState("running", {
+    defaultValue: false,
+  });
 
   const [editId, setEditId] = useState("");
   const [showForm, setShowForm] = useState(false);
