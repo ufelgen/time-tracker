@@ -14,10 +14,15 @@
     "prettier": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {
+    "date-fns": "^2.30.0",
+    "nanoid": "^4.0.2",
     "next": "13.0.3",
     "react": "18.2.0",
+    "react-confetti": "^6.1.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.6"
+    "react-icons": "^4.10.1",
+    "styled-components": "^5.3.11",
+    "use-local-storage-state": "^18.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
