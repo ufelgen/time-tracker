@@ -35,11 +35,9 @@ export default function NewTimeForm({
     if (time.id !== editTimeId) {
       onAddTime(newEntry);
       onShowNewTimeForm(0);
-      console.log("i am in if in NewTimeForm");
     } else {
       onEditTime(time.id, newEntry);
       onChangeEditTimeId(0);
-      console.log("i am in else in NewTimeForm");
     }
   }
   return (

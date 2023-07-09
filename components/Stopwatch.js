@@ -28,18 +28,15 @@ export default function Stopwatch({ project, onAddTime }) {
 
   function startTimer() {
     setRunning(true);
-    console.log("timer started");
   }
 
   function stopTimer() {
     setRunning(false);
-    console.log("timer stopped");
     setSaveEntry(true);
   }
 
   function pauseTimer() {
     setRunning(false);
-    console.log("timer paused");
   }
 
   function handleSaveEntry(event, project) {

@@ -16,7 +16,6 @@ function MyApp({ Component, pageProps }) {
 
   function handleChangeEditId(editId) {
     setEditId(editId);
-    console.log(editId);
   }
 
   function toggleShowForm() {
@@ -37,7 +36,6 @@ function MyApp({ Component, pageProps }) {
 
   function handleChangeEditTimeId(timeId) {
     setEditTimeId(timeId);
-    console.log("huhu", timeId);
   }
 
   return (

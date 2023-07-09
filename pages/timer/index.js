@@ -54,7 +54,7 @@ export default function Timer({
     const projectEntryToUpdate = projects.find(
       (project) => project.name === newEntry.projectName
     );
-    console.log("projectEntryToUpdate", projectEntryToUpdate);
+
     if (projectEntryToUpdate) {
       const updatedEntry = {
         ...projectEntryToUpdate,
@@ -65,9 +65,7 @@ export default function Timer({
           project.name === newEntry.projectName ? updatedEntry : project
         )
       );
-      console.log("i am in if");
     } else {
-      console.log("i am in else");
       return;
     }
   }
