@@ -5,6 +5,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import NewTimePopup from "./NewTimePopup";
 import Stopwatch from "./Stopwatch";
+import NewTimeForm from "./NewTimeForm";
 
 export default function Projects({
   projects,
@@ -16,6 +17,8 @@ export default function Projects({
   onShowPopup,
   stopwatch,
   onShowStopwatch,
+  newTimeForm,
+  onShowNewTimeForm,
   onAddTime,
 }) {
   if (!projects) {
@@ -81,6 +84,13 @@ export default function Projects({
               </span>
             </div>
           ))}
+          {newTimeForm === project.id && (
+            <NewTimeForm
+              project={project}
+              onAddTime={onAddTime}
+              onShowNewTimeForm={onShowNewTimeForm}
+            />
+          )}
           <section>
             <button type="button" onClick={() => onDeleteProject(project.id)}>
               <IoMdTrash fontSize="5vh" color={project.textColour} />
@@ -99,6 +109,7 @@ export default function Projects({
               <NewTimePopup
                 onShowStopwatch={onShowStopwatch}
                 onShowPopup={onShowPopup}
+                onShowNewTimeForm={onShowNewTimeForm}
                 project={project}
               />
             )}
@@ -117,8 +128,10 @@ const ProjectsContainer = styled.section`
   width: 100%;
 
   article {
-    margin: 0.5rem;
+    width: 90%;
+    margin-bottom: 1rem !important;
     border-radius: 5px;
+    padding: 1rem;
 
     h2 {
       padding: 0.5rem;
@@ -135,6 +148,7 @@ const ProjectsContainer = styled.section`
     justify-content: space-between;
     align-items: center;
     position: relative;
+    padding-top: 1rem;
 
     button {
       height: 5vh;

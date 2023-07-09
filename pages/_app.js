@@ -10,7 +10,8 @@ function MyApp({ Component, pageProps }) {
   const [editId, setEditId] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [showPopup, setShowPopup] = useState("");
-  const [stopwatch, setStopwatch] = useState(false);
+  const [stopwatch, setStopwatch] = useState(0);
+  const [newTimeForm, setNewTimeForm] = useState(0);
 
   function handleChangeEditId(editId) {
     setEditId(editId);
@@ -29,6 +30,10 @@ function MyApp({ Component, pageProps }) {
     setStopwatch(stopwatchId);
   }
 
+  function handleShowNewTimeForm(stopwatchId) {
+    setNewTimeForm(stopwatchId);
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -42,6 +47,8 @@ function MyApp({ Component, pageProps }) {
         onShowPopup={handleShowPopup}
         stopwatch={stopwatch}
         onShowStopwatch={handleShowStopwatch}
+        onShowNewTimeForm={handleShowNewTimeForm}
+        newTimeForm={newTimeForm}
       />
     </>
   );

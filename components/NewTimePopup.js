@@ -5,10 +5,16 @@ import { BsPencilFill } from "react-icons/bs";
 export default function NewTimePopup({
   onShowStopwatch,
   onShowPopup,
+  onShowNewTimeForm,
   project,
 }) {
   function showStopwatch(stopwatchId) {
     onShowStopwatch(stopwatchId);
+    onShowPopup("");
+  }
+
+  function inputTimeManually(addTimeId) {
+    onShowNewTimeForm(addTimeId);
     onShowPopup("");
   }
   return (
@@ -16,7 +22,7 @@ export default function NewTimePopup({
       <button type="button" onClick={() => showStopwatch(project.id)}>
         <GiSandsOfTime fontSize="5vh" />
       </button>
-      <button type="button">
+      <button type="button" onClick={() => inputTimeManually(project.id)}>
         <BsPencilFill fontSize="5vh" />
       </button>
     </PopupBox>

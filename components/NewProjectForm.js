@@ -31,7 +31,12 @@ export default function NewProjectForm({ toggleShowForm, onAddNewProject }) {
   return (
     <StyledForm onSubmit={(event) => handleSubmit(event)}>
       <label htmlFor="projectName"></label>
-      <input name="projectName" id="projectName" placeholder="Neues Projekt" />
+      <input
+        name="projectName"
+        id="projectName"
+        placeholder="Neues Projekt"
+        required
+      />
       <label htmlFor="projectColour"></label>
       <input type="color" name="projectColour" id="projectColour" />
       <div>

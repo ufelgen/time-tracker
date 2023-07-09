@@ -4,7 +4,6 @@ import { BaseMain } from "../../components/AllStyles";
 import { AiFillPlusCircle } from "react-icons/ai";
 import NewProjectForm from "../../components/NewProjectForm";
 import Projects from "../../components/Projects";
-import { nanoid } from "nanoid";
 
 export default function Timer({
   editId,
@@ -15,6 +14,8 @@ export default function Timer({
   onShowPopup,
   stopwatch,
   onShowStopwatch,
+  newTimeForm,
+  onShowNewTimeForm,
 }) {
   const [projects, setProjects] = useLocalStorageState("projects");
   if (!projects) {
@@ -82,6 +83,8 @@ export default function Timer({
         onShowPopup={onShowPopup}
         stopwatch={stopwatch}
         onShowStopwatch={onShowStopwatch}
+        newTimeForm={newTimeForm}
+        onShowNewTimeForm={onShowNewTimeForm}
         onAddTime={handleAddTime}
       />
     </BaseMain>
