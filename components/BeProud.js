@@ -13,7 +13,11 @@ const StyledDiv = styled.div`
   height: auto;
   width: 80vw;
   top: 30vh;
-  //left: 10vw;
+  left: 10vw;
+
+  @media (min-width: 500px) {
+    left: auto;
+  }
 
   background-color: lightgoldenrodyellow;
   color: var(--primary);
