@@ -5,6 +5,11 @@ export const BaseMain = styled.main`
   //margin-bottom: 20vh;
   margin-top: 0;
   background: var(--background-gradient);
+  max-width: 800px;
+  margin: 0 auto !important;
+  position: relative;
+  //float: none !important;
+  //position: center;
 
   h1 {
     margin: 0;

@@ -92,7 +92,7 @@ const StyledAddButton = styled.button`
   background-color: transparent;
   color: var(--primary);
   font-size: 7.7vh;
-  position: fixed;
+  position: absolute;
   bottom: 12vh;
   right: 1rem;
   border: none;
