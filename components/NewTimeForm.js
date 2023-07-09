@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { BsFillCheckCircleFill } from "react-icons/bs";
+import {
+  BsFillCheckCircleFill,
+  BsFillArrowLeftCircleFill,
+} from "react-icons/bs";
 import { nanoid } from "nanoid";
 
 export default function NewTimeForm({
@@ -69,6 +72,12 @@ export default function NewTimeForm({
       <div>
         <button type="submit">
           <BsFillCheckCircleFill fontSize="5vh" color={project.textColour} />
+        </button>
+        <button type="button" onClick={() => onShowNewTimeForm(false)}>
+          <BsFillArrowLeftCircleFill
+            fontSize="5vh"
+            color={project.textColour}
+          />
         </button>
       </div>
     </AddTimeManuallyForm>

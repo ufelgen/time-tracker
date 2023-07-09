@@ -163,7 +163,7 @@ export default function Timer({
           onAddNewProject={handleAddProject}
         />
       )}
-      <h2>Heute ist der {today}</h2>
+
       <Projects
         projects={projects}
         onDeleteProject={handleDeleteProject}
@@ -181,6 +181,7 @@ export default function Timer({
         editTimeId={editTimeId}
         onChangeEditTimeId={onChangeEditTimeId}
         onEditTime={handleEditTime}
+        today={today}
       />
     </BaseMain>
   );
@@ -191,7 +192,7 @@ const StyledFixedButton = styled.button`
   color: var(--primary);
   font-size: 7.7vh;
   position: absolute;
-  bottom: 5vh;
+  bottom: 2vh;
   right: 1rem;
   border: none;
   z-index: 5;
@@ -205,5 +206,5 @@ const StyledFinishButton = styled(StyledFixedButton)`
   color: white;
   padding: 1rem;
   border-radius: 5px;
-  bottom: 6vh;
+  bottom: 3vh;
 `;

@@ -18,11 +18,12 @@ export const BaseMain = styled.main`
 `;
 
 export const StyledForm = styled.form`
-  position: fixed;
-  width: 80vw;
+  position: absolute;
   height: auto;
-  margin-top: 3rem;
-  margin-left: 10vw;
+  width: 80vw;
+  top: 30vh;
+  left: 10vw;
+
   padding: 1rem;
   display: flex;
   flex-direction: column;

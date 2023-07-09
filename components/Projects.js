@@ -24,6 +24,7 @@ export default function Projects({
   editTimeId,
   onChangeEditTimeId,
   onEditTime,
+  today,
 }) {
   if (!projects) {
     return null;
@@ -39,6 +40,7 @@ export default function Projects({
 
   return (
     <ProjectsContainer>
+      <h2>Heute ist der {today}</h2>
       {projects.map((project) => (
         <article
           key={project?.id}
@@ -161,7 +163,7 @@ export default function Projects({
 
 const ProjectsContainer = styled.section`
   position: fixed;
-  top: 10vh;
+  top: 1vh;
   bottom: 20vh;
   overflow-y: scroll;
   width: 100%;

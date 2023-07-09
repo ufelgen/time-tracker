@@ -1,7 +1,7 @@
 import { getGreeting } from "../helpers/getGreeting";
-import styled from "styled-components";
 import Footer from "../components/Footer";
 import { BaseMain } from "../components/AllStyles";
+import RandomImage from "../components/RandomImage";
 
 export default function Home() {
   const greeting = getGreeting();
@@ -9,6 +9,8 @@ export default function Home() {
     <>
       <BaseMain>
         <h1>{greeting}</h1>
+
+        <RandomImage />
       </BaseMain>
       <Footer />
     </>
