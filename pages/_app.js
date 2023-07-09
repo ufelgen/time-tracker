@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }) {
   const [stopwatch, setStopwatch] = useState(0);
   const [newTimeForm, setNewTimeForm] = useState(0);
   const [editTimeId, setEditTimeId] = useState(0);
+  const [celebration, setCelebration] = useState(false);
 
   function handleChangeEditId(editId) {
     setEditId(editId);
@@ -55,6 +56,8 @@ function MyApp({ Component, pageProps }) {
         newTimeForm={newTimeForm}
         editTimeId={editTimeId}
         onChangeEditTimeId={handleChangeEditTimeId}
+        celebration={celebration}
+        setCelebration={setCelebration}
       />
     </>
   );

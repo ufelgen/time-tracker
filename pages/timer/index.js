@@ -7,7 +7,6 @@ import Projects from "../../components/Projects";
 import BeProud from "../../components/BeProud";
 import format from "date-fns/format";
 import dynamic from "next/dynamic";
-import { useState } from "react";
 
 export default function Timer({
   editId,
@@ -22,12 +21,13 @@ export default function Timer({
   onShowNewTimeForm,
   editTimeId,
   onChangeEditTimeId,
+  celebration,
+  setCelebration,
 }) {
   const [projects, setProjects] = useLocalStorageState("projects");
   if (!projects) {
     return null;
   }
-  const [celebration, setCelebration] = useState(false);
 
   const today = format(new Date(), "dd. MM. yyyy");
 
