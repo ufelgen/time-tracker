@@ -8,8 +8,7 @@ export const BaseMain = styled.main`
   margin: 0 auto !important;
   position: relative;
 
-  h1,
-  h2 {
+  h1 {
     margin: 0;
     padding: 1rem;
     text-align: center;
