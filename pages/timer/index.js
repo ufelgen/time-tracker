@@ -4,6 +4,10 @@ import { BaseMain } from "../../components/AllStyles";
 import { AiFillPlusCircle } from "react-icons/ai";
 import NewProjectForm from "../../components/NewProjectForm";
 import Projects from "../../components/Projects";
+import BeProud from "../../components/BeProud";
+import format from "date-fns/format";
+import dynamic from "next/dynamic";
+import { useState } from "react";
 
 export default function Timer({
   editId,
@@ -23,6 +27,9 @@ export default function Timer({
   if (!projects) {
     return null;
   }
+  const [celebration, setCelebration] = useState(false);
+
+  const today = format(new Date(), "dd. MM. yyyy");
 
   function handleAddProject(newProject) {
     setProjects([...projects, newProject]);
@@ -101,17 +108,62 @@ export default function Timer({
       )
     );
   }
+
+  function finishDay() {
+    const confirmation = confirm(
+      "Möchtest du deinen Arbeitstag abschließen? Dies löscht alle Zeiten aus deinen Projekten!"
+    );
+
+    if (confirmation) {
+      setProjects(
+        projects.map((project) => {
+          return { ...project, times: [] };
+        })
+      );
+      handleCelebration();
+    }
+  }
+
+  const { height, width } = dynamic(
+    () => import("../../helpers/useWindowSize"),
+    {
+      ssr: false,
+    }
+  );
+
+  const Confetti = dynamic(() => import("react-confetti"), {
+    ssr: false,
+  });
+
+  function handleCelebration() {
+    setCelebration(true);
+    setTimeout(handleConfettiStop, 5000);
+  }
+
+  function handleConfettiStop() {
+    setCelebration(false);
+  }
+
   return (
     <BaseMain>
-      <StyledAddButton onClick={toggleShowForm}>
+      {celebration && (
+        <>
+          <Confetti height={height} width={width} /> <BeProud />
+        </>
+      )}
+      <StyledFixedButton onClick={toggleShowForm}>
         <AiFillPlusCircle />
-      </StyledAddButton>
+      </StyledFixedButton>
+      <StyledFinishButton onClick={finishDay}>
+        Tag abschließen
+      </StyledFinishButton>
       {showForm && (
         <NewProjectForm
           toggleShowForm={toggleShowForm}
           onAddNewProject={handleAddProject}
         />
       )}
+      <h2>Heute ist der {today}</h2>
       <Projects
         projects={projects}
         onDeleteProject={handleDeleteProject}
@@ -134,13 +186,24 @@ export default function Timer({
   );
 }
 
-const StyledAddButton = styled.button`
+const StyledFixedButton = styled.button`
   background-color: transparent;
   color: var(--primary);
   font-size: 7.7vh;
   position: absolute;
-  bottom: 12vh;
+  bottom: 5vh;
   right: 1rem;
   border: none;
   z-index: 5;
+`;
+
+const StyledFinishButton = styled(StyledFixedButton)`
+  left: 1rem;
+  right: auto;
+  font-size: 3vh;
+  background-color: var(--primary);
+  color: white;
+  padding: 1rem;
+  border-radius: 5px;
+  bottom: 6vh;
 `;

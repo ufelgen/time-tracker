@@ -2,19 +2,18 @@ import styled from "styled-components";
 
 export const BaseMain = styled.main`
   height: 100vh;
-  //margin-bottom: 20vh;
   margin-top: 0;
   background: var(--background-gradient);
   max-width: 800px;
   margin: 0 auto !important;
   position: relative;
-  //float: none !important;
-  //position: center;
 
-  h1 {
+  h1,
+  h2 {
     margin: 0;
     padding: 1rem;
     text-align: center;
+    color: white;
   }
 `;
 
