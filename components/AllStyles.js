@@ -22,7 +22,7 @@ export const StyledForm = styled.form`
   height: auto;
   width: 80vw;
   top: 30vh;
-  left: 10vw;
+  //left: 10vw;
 
   padding: 1rem;
   display: flex;
