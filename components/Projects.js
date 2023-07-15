@@ -6,6 +6,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import NewTimePopup from "./NewTimePopup";
 import Stopwatch from "./Stopwatch";
 import NewTimeForm from "./NewTimeForm";
+import StopwatchPtTwo from "./StopwatchPtTwo";
 
 export default function Projects({
   projects,
@@ -73,8 +74,11 @@ export default function Projects({
               <h2 color={project.textColour}>{project?.name}</h2>
             )}
           </div>
-          {stopwatch === project.id && (
+          {/*           {stopwatch === project.id && (
             <Stopwatch project={project} onAddTime={onAddTime} />
+          )} */}
+          {stopwatch === project.id && (
+            <StopwatchPtTwo project={project} onAddTime={onAddTime} />
           )}
           {project.times.map((time) => (
             <div key={time.id}>
