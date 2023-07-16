@@ -16,7 +16,7 @@ export default function RandomImage() {
       <StyledImageContainer>
         <Image
           src={url}
-          alt="cute animal"
+          alt="awesome picture"
           layout="fill"
           objectFit="cover"
           priority

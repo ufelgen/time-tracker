@@ -40,6 +40,11 @@ export default function NewTimeForm({
       onChangeEditTimeId(0);
     }
   }
+
+  function returnFromForm() {
+    onShowNewTimeForm(false);
+    onChangeEditTimeId(0);
+  }
   return (
     <AddTimeManuallyForm onSubmit={(event) => addTimeManually(event, project)}>
       <label htmlFor="description">Beschreibung: </label>
@@ -68,14 +73,14 @@ export default function NewTimeForm({
         required
       />
       <div>
-        <button type="submit">
-          <BsFillCheckCircleFill fontSize="5vh" color={project.textColour} />
-        </button>
-        <button type="button" onClick={() => onShowNewTimeForm(false)}>
+        <button type="button" onClick={returnFromForm}>
           <BsFillArrowLeftCircleFill
             fontSize="5vh"
             color={project.textColour}
           />
+        </button>
+        <button type="submit">
+          <BsFillCheckCircleFill fontSize="5vh" color={project.textColour} />
         </button>
       </div>
     </AddTimeManuallyForm>
