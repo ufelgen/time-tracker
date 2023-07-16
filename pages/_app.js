@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
   const [newTimeForm, setNewTimeForm] = useState(0);
   const [editTimeId, setEditTimeId] = useState(0);
   const [celebration, setCelebration] = useState(false);
-  const [saveEntry, setSaveEntry] = useState(false);
+  const [saveEntry, setSaveEntry] = useState(0);
   const [showOverview, setShowOverview] = useState(false);
 
   function handleChangeEditId(editId) {
@@ -39,8 +39,8 @@ function MyApp({ Component, pageProps }) {
     setEditTimeId(timeId);
   }
 
-  function toggleSaveEntry() {
-    setSaveEntry(!saveEntry);
+  function handleSaveEntryId(id) {
+    setSaveEntry(id);
   }
 
   function toggleShowOverview() {
@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }) {
         celebration={celebration}
         setCelebration={setCelebration}
         saveEntry={saveEntry}
-        toggleSaveEntry={toggleSaveEntry}
+        handleSaveEntryId={handleSaveEntryId}
         showOverview={showOverview}
         toggleShowOverview={toggleShowOverview}
       />

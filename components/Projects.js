@@ -12,10 +12,6 @@ export default function Projects({
   onUpdateProjectName,
   editId,
   onChangeEditId,
-  //showPopup,
-  //onShowPopup,
-  //stopwatch,
-  //onShowStopwatch,
   newTimeForm,
   onShowNewTimeForm,
   onAddTime,
@@ -25,7 +21,7 @@ export default function Projects({
   onEditTime,
   today,
   saveEntry,
-  toggleSaveEntry,
+  handleSaveEntryId,
 }) {
   if (!projects) {
     return null;
@@ -78,7 +74,7 @@ export default function Projects({
             project={project}
             onAddTime={onAddTime}
             saveEntry={saveEntry}
-            toggleSaveEntry={toggleSaveEntry}
+            handleSaveEntryId={handleSaveEntryId}
           />
           {project.times.map((time) => (
             <div key={time.id}>

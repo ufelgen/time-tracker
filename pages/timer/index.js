@@ -25,7 +25,7 @@ export default function Timer({
   celebration,
   setCelebration,
   saveEntry,
-  toggleSaveEntry,
+  handleSaveEntryId,
   showOverview,
   toggleShowOverview,
 }) {
@@ -199,7 +199,7 @@ export default function Timer({
         onEditTime={handleEditTime}
         today={today}
         saveEntry={saveEntry}
-        toggleSaveEntry={toggleSaveEntry}
+        handleSaveEntryId={handleSaveEntryId}
       />
       {showOverview && (
         <Overview

@@ -15,7 +15,7 @@ export default function StopwatchPtTwo({
   project,
   onAddTime,
   saveEntry,
-  toggleSaveEntry,
+  handleSaveEntryId,
 }) {
   const [startStopArray, setStartStopArray] =
     useLocalStorageState("startStopArray");
@@ -80,8 +80,8 @@ export default function StopwatchPtTwo({
     setRunning(running.filter((id) => id !== project.id));
   }
 
-  function storeStop() {
-    toggleSaveEntry();
+  function storeStop(id) {
+    handleSaveEntryId(id);
     storePause();
   }
 
@@ -100,7 +100,6 @@ export default function StopwatchPtTwo({
     for (let i = 0; i < totalTimeArray.length; i++) {
       totalTimeInMinutes += totalTimeArray[i];
     }
-    console.log("totalTimeInMinutes", totalTimeInMinutes);
 
     const totalTimeInMilliseconds = totalTimeInMinutes * 60000;
 
@@ -114,7 +113,7 @@ export default function StopwatchPtTwo({
     };
 
     onAddTime(newEntry);
-    toggleSaveEntry();
+    handleSaveEntryId(0);
     setStartStopArray(
       startStopArray.filter((object) => object.id !== project.id)
     );
@@ -134,7 +133,11 @@ export default function StopwatchPtTwo({
       if (projectInStartStopArray && !lastPosition.start) {
         const status = "running";
         return status;
-      } else if (projectInStartStopArray && lastPosition.start) {
+      } else if (
+        projectInStartStopArray &&
+        lastPosition.start &&
+        saveEntry !== project.id
+      ) {
         const status = "paused";
         return status;
       } else {
@@ -148,7 +151,7 @@ export default function StopwatchPtTwo({
   return (
     <StopwatchContainer>
       <div>
-        {saveEntry ? (
+        {saveEntry === project.id ? (
           <form onSubmit={(event) => handleSaveEntry(event, project)}>
             <label htmlFor="description"></label>
             <input
@@ -156,7 +159,7 @@ export default function StopwatchPtTwo({
               id="description"
               placeholder="Beschreibung"
             />
-            <button type="button" onClick={toggleSaveEntry}>
+            <button type="button" onClick={() => handleSaveEntryId(0)}>
               <BsFillArrowLeftCircleFill
                 fontSize="5vh"
                 color={project.textColour}
@@ -197,7 +200,7 @@ export default function StopwatchPtTwo({
             </button>
             <button
               type="button"
-              onClick={storeStop}
+              onClick={() => storeStop(project.id)}
               disabled={!running.includes(project.id)}
             >
               <BsStopCircleFill
