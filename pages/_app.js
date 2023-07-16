@@ -47,6 +47,11 @@ function MyApp({ Component, pageProps }) {
     setShowOverview(!showOverview);
   }
 
+  function clearStartStopArray() {
+    setStartStopArray([]);
+    setRunning([]);
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -66,6 +71,7 @@ function MyApp({ Component, pageProps }) {
         handleSaveEntryId={handleSaveEntryId}
         showOverview={showOverview}
         toggleShowOverview={toggleShowOverview}
+        clearStartStopArray={clearStartStopArray}
       />
     </>
   );

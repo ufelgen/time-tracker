@@ -19,7 +19,13 @@ export default function StopwatchPtTwo({
 }) {
   const [startStopArray, setStartStopArray] =
     useLocalStorageState("startStopArray");
+  if (!startStopArray) {
+    return null;
+  }
   const [running, setRunning] = useLocalStorageState("running");
+  if (!running) {
+    return null;
+  }
 
   function storeStart() {
     if (running[0]) {

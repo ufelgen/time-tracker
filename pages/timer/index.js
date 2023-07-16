@@ -28,15 +28,12 @@ export default function Timer({
   handleSaveEntryId,
   showOverview,
   toggleShowOverview,
+  clearStartStopArray,
 }) {
   const [projects, setProjects] = useLocalStorageState("projects");
   if (!projects) {
     return null;
   }
-
-  const [startStopArray, setStartStopArray] =
-    useLocalStorageState("startStopArray");
-  const [running, setRunning] = useLocalStorageState("running");
 
   const today = format(new Date(), "dd. MM. yyyy");
 
@@ -136,8 +133,7 @@ export default function Timer({
     onChangeEditId(0);
     onShowNewTimeForm(0);
     onChangeEditTimeId(0);
-    setRunning([]);
-    setStartStopArray([]);
+    clearStartStopArray();
     toggleShowOverview();
   }
 
