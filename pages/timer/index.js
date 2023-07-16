@@ -5,6 +5,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import NewProjectForm from "../../components/NewProjectForm";
 import Projects from "../../components/Projects";
 import BeProud from "../../components/BeProud";
+import Overview from "../../components/Overview";
 import format from "date-fns/format";
 import dynamic from "next/dynamic";
 
@@ -23,11 +24,19 @@ export default function Timer({
   onChangeEditTimeId,
   celebration,
   setCelebration,
+  saveEntry,
+  toggleSaveEntry,
+  showOverview,
+  toggleShowOverview,
 }) {
   const [projects, setProjects] = useLocalStorageState("projects");
   if (!projects) {
     return null;
   }
+
+  const [startStopArray, setStartStopArray] =
+    useLocalStorageState("startStopArray");
+  const [running, setRunning] = useLocalStorageState("running");
 
   const today = format(new Date(), "dd. MM. yyyy");
 
@@ -125,10 +134,10 @@ export default function Timer({
       toggleShowForm();
     }
     onChangeEditId(0);
-    onShowPopup(0);
-    onShowStopwatch(0);
     onShowNewTimeForm(0);
     onChangeEditTimeId(0);
+    setRunning([]);
+    setStartStopArray([]);
   }
 
   const { height, width } = dynamic(
@@ -161,7 +170,7 @@ export default function Timer({
       <StyledFixedButton onClick={toggleShowForm}>
         <AiFillPlusCircle />
       </StyledFixedButton>
-      <StyledFinishButton onClick={finishDay}>
+      <StyledFinishButton onClick={toggleShowOverview}>
         Tag abschließen
       </StyledFinishButton>
       {showForm && (
@@ -189,7 +198,15 @@ export default function Timer({
         onChangeEditTimeId={onChangeEditTimeId}
         onEditTime={handleEditTime}
         today={today}
+        saveEntry={saveEntry}
+        toggleSaveEntry={toggleSaveEntry}
       />
+      {showOverview && (
+        <Overview
+          finishDay={finishDay}
+          toggleShowOverview={toggleShowOverview}
+        />
+      )}
     </BaseMain>
   );
 }

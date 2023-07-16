@@ -3,8 +3,6 @@ import { IoMdTrash } from "react-icons/io";
 import { BiEdit } from "react-icons/bi";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { BsFillCheckCircleFill } from "react-icons/bs";
-import NewTimePopup from "./NewTimePopup";
-import Stopwatch from "./Stopwatch";
 import NewTimeForm from "./NewTimeForm";
 import StopwatchPtTwo from "./StopwatchPtTwo";
 
@@ -14,10 +12,10 @@ export default function Projects({
   onUpdateProjectName,
   editId,
   onChangeEditId,
-  showPopup,
-  onShowPopup,
-  stopwatch,
-  onShowStopwatch,
+  //showPopup,
+  //onShowPopup,
+  //stopwatch,
+  //onShowStopwatch,
   newTimeForm,
   onShowNewTimeForm,
   onAddTime,
@@ -26,6 +24,8 @@ export default function Projects({
   onChangeEditTimeId,
   onEditTime,
   today,
+  saveEntry,
+  toggleSaveEntry,
 }) {
   if (!projects) {
     return null;
@@ -74,12 +74,12 @@ export default function Projects({
               <h2 color={project.textColour}>{project?.name}</h2>
             )}
           </div>
-          {/*           {stopwatch === project.id && (
-            <Stopwatch project={project} onAddTime={onAddTime} />
-          )} */}
-          {stopwatch === project.id && (
-            <StopwatchPtTwo project={project} onAddTime={onAddTime} />
-          )}
+          <StopwatchPtTwo
+            project={project}
+            onAddTime={onAddTime}
+            saveEntry={saveEntry}
+            toggleSaveEntry={toggleSaveEntry}
+          />
           {project.times.map((time) => (
             <div key={time.id}>
               {time.id === editTimeId ? (
@@ -101,11 +101,8 @@ export default function Projects({
                     {("0" + Math.floor((time.time / 3600000) % 60)).slice(-2)}:
                   </span>
                   <span>
-                    {("0" + Math.floor((time.time / 60000) % 60)).slice(-2)}:
+                    {("0" + Math.floor((time.time / 60000) % 60)).slice(-2)}
                   </span>
-                  {/*                   <span>
-                    {("0" + Math.floor((time.time / 1000) % 60)).slice(-2)}
-                  </span> */}
                   <span>
                     <button
                       type="button"
@@ -147,17 +144,9 @@ export default function Projects({
             >
               <BiEdit fontSize="5vh" color={project.textColour} />
             </button>
-            <button type="button" onClick={() => onShowPopup(project.id)}>
+            <button type="button" onClick={() => onShowNewTimeForm(project.id)}>
               <AiFillPlusCircle fontSize="5vh" color={project.textColour} />
             </button>
-            {showPopup === project.id && (
-              <NewTimePopup
-                onShowStopwatch={onShowStopwatch}
-                onShowPopup={onShowPopup}
-                onShowNewTimeForm={onShowNewTimeForm}
-                project={project}
-              />
-            )}
           </section>
         </article>
       ))}
