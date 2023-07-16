@@ -73,14 +73,14 @@ export default function NewTimeForm({
         required
       />
       <div>
-        <button type="submit">
-          <BsFillCheckCircleFill fontSize="5vh" color={project.textColour} />
-        </button>
         <button type="button" onClick={returnFromForm}>
           <BsFillArrowLeftCircleFill
             fontSize="5vh"
             color={project.textColour}
           />
+        </button>
+        <button type="submit">
+          <BsFillCheckCircleFill fontSize="5vh" color={project.textColour} />
         </button>
       </div>
     </AddTimeManuallyForm>

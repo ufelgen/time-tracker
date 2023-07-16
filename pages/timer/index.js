@@ -138,6 +138,7 @@ export default function Timer({
     onChangeEditTimeId(0);
     setRunning([]);
     setStartStopArray([]);
+    toggleShowOverview();
   }
 
   const { height, width } = dynamic(

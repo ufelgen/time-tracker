@@ -33,11 +33,11 @@ export default function Overview({ finishDay, toggleShowOverview }) {
         </div>
       ))}
       <div>
-        <button type="button" onClick={finishDay}>
-          <BsFillCheckCircleFill fontSize="5vh" />
-        </button>
         <button type="button" onClick={toggleShowOverview}>
           <BsFillArrowLeftCircleFill fontSize="5vh" />
+        </button>
+        <button type="button" onClick={finishDay}>
+          <BsFillCheckCircleFill fontSize="5vh" />
         </button>
       </div>
     </OverviewPopup>
@@ -47,8 +47,7 @@ export default function Overview({ finishDay, toggleShowOverview }) {
 const OverviewPopup = styled.div`
   position: absolute;
   height: 50vh;
-  width: 90vw;
-  left: 5vw;
+  width: 100vw;
   top: 20vh;
   overflow-y: scroll;
 
