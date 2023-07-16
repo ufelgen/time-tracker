@@ -20,14 +20,10 @@ export default function StopwatchPtTwo({ project, onAddTime }) {
   const [running2, setRunning2] = useLocalStorageState("running2");
   const [saveEntry2, setSaveEntry2] = useState(false);
 
-  const now = format(new Date(), "HH:mm");
-  console.log("nowbutoutside", now);
-
   function storeStart() {
     const now = format(new Date(), "HH:mm");
     setStartStopArray([...startStopArray, now]);
     setRunning2(true);
-    console.log("now", now);
   }
 
   function storePause() {
@@ -43,6 +39,7 @@ export default function StopwatchPtTwo({ project, onAddTime }) {
 
   function storeStop() {
     setSaveEntry2(true);
+    setRunning2(false);
     const now = format(new Date(), "HH:mm");
     const arrayLength = startStopArray.length;
 
@@ -51,41 +48,53 @@ export default function StopwatchPtTwo({ project, onAddTime }) {
     const shortenedArray = startStopArray.slice(0, arrayLength - 1);
     setStartStopArray([...shortenedArray, newTimePair]);
 
-    /*     const totalTimeArray = startStopArray.map((time) =>
-      determineTimeDifference(time.start, time.stop)
-    ); */
-    //an dieser Stelle hat die Funktion noch nicht das letzte Objekt, weil setter Funktion verzögert --> zwei Funktionen hintereinander schalten
+    //handleTimeDifference();
 
     //Vorsicht, 1. müssen zwei Timer gleichzeitig gestartet werden können
 
     // 2. das startStopArray muss dem Projekt zugewiesen sein
-    const totalTimeArray = startStopArray.map((time) => time.start);
-    console.log("totalTimeArray", totalTimeArray);
+  }
 
-    /*     let totalTimeInMinutes = 0;
+  function handleTimeDifference() {
+    const totalTimeArray = startStopArray.map((time) =>
+      determineTimeDifference(time.start, time.stop)
+    );
+    let totalTimeInMinutes = 0;
 
     for (let i = 0; i < totalTimeArray.length; i++) {
       totalTimeInMinutes += totalTimeArray[i];
     }
 
-    console.log("totalTimeInMinutes", totalTimeInMinutes); */
+    console.log("totalTimeInMinutes", totalTimeInMinutes);
   }
 
   function handleSaveEntry(event, project) {
     event.preventDefault();
 
+    const totalTimeArray = startStopArray.map((time) =>
+      determineTimeDifference(time.start, time.stop)
+    );
+    let totalTimeInMinutes = 0;
+
+    for (let i = 0; i < totalTimeArray.length; i++) {
+      totalTimeInMinutes += totalTimeArray[i];
+    }
+    console.log("totalTimeInMinutes", totalTimeInMinutes);
+
+    const totalTimeInMilliseconds = totalTimeInMinutes * 60000;
+
     const newEntry = {
       projectName: project.name,
       timeObject: {
         id: nanoid(),
-        time: time,
+        time: totalTimeInMilliseconds,
         description: event.target.elements.description.value,
       },
     };
 
     onAddTime(newEntry);
     setSaveEntry2(false);
-    setTime(0);
+    //setTime(0);
   }
 
   return (
@@ -114,21 +123,22 @@ export default function StopwatchPtTwo({ project, onAddTime }) {
           </form>
         ) : (
           <>
-            <button type="button" onClick={storePause}>
-              <BsPauseCircleFill fontSize="5vh" color={project.textColour} />
-            </button>
-            <button type="button">
-              <BsFillPlayCircleFill
-                onClick={storeStart}
+            <button type="button" onClick={storePause} disabled={!running2}>
+              <BsPauseCircleFill
                 fontSize="5vh"
-                color={project.textColour}
+                color={running2 ? project.textColour : "grey"}
               />
             </button>
-            <button type="button">
-              <BsStopCircleFill
-                onClick={storeStop}
+            <button type="button" onClick={storeStart} disabled={running2}>
+              <BsFillPlayCircleFill
                 fontSize="5vh"
-                color={project.textColour}
+                color={!running2 ? project.textColour : "grey"}
+              />
+            </button>
+            <button type="button" onClick={storeStop} disabled={!running2}>
+              <BsStopCircleFill
+                fontSize="5vh"
+                color={running2 ? project.textColour : "grey"}
               />
             </button>
           </>
@@ -150,6 +160,9 @@ const StopwatchContainer = styled.div`
   button {
     background-color: transparent;
     border: none;
+    &.disabledButton {
+      color: grey;
+    }
   }
 
   div {

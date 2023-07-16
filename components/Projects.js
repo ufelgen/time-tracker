@@ -103,9 +103,9 @@ export default function Projects({
                   <span>
                     {("0" + Math.floor((time.time / 60000) % 60)).slice(-2)}:
                   </span>
-                  <span>
+                  {/*                   <span>
                     {("0" + Math.floor((time.time / 1000) % 60)).slice(-2)}
-                  </span>
+                  </span> */}
                   <span>
                     <button
                       type="button"
