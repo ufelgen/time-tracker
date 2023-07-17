@@ -24,6 +24,7 @@ export default function Projects({
   today,
   saveEntry,
   handleSaveEntryId,
+  running,
 }) {
   if (!projects) {
     return null;
@@ -72,7 +73,11 @@ export default function Projects({
               <h2 color={project.textColour}>{project?.name}</h2>
             )}
           </div>
-          <Lottie animationData={penguin} loop={true} />
+          {running[0] === project.id && (
+            <AnimationContainer>
+              <Lottie animationData={penguin} loop={true} />
+            </AnimationContainer>
+          )}
           <StopwatchPtTwo
             project={project}
             onAddTime={onAddTime}
@@ -165,6 +170,7 @@ const ProjectsContainer = styled.section`
     margin-bottom: 1rem !important;
     border-radius: 5px;
     padding: 1rem;
+    position: relative;
 
     h2 {
       padding: 0.5rem;
@@ -217,4 +223,14 @@ const EditNameForm = styled.form`
     border: none;
     margin: 5px;
   }
+`;
+
+const AnimationContainer = styled.div`
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
 `;

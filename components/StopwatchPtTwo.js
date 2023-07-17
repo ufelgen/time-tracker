@@ -233,6 +233,7 @@ const StopwatchContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 0 1rem 0;
+  z-index: 3;
 
   button {
     background-color: transparent;

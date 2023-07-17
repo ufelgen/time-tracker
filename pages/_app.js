@@ -72,6 +72,7 @@ function MyApp({ Component, pageProps }) {
         showOverview={showOverview}
         toggleShowOverview={toggleShowOverview}
         clearStartStopArray={clearStartStopArray}
+        running={running}
       />
     </>
   );

@@ -29,6 +29,7 @@ export default function Timer({
   showOverview,
   toggleShowOverview,
   clearStartStopArray,
+  running,
 }) {
   const [projects, setProjects] = useLocalStorageState("projects");
   if (!projects) {
@@ -197,6 +198,7 @@ export default function Timer({
         today={today}
         saveEntry={saveEntry}
         handleSaveEntryId={handleSaveEntryId}
+        running={running}
       />
       {showOverview && (
         <Overview
