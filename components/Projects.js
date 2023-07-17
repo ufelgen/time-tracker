@@ -5,6 +5,8 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import NewTimeForm from "./NewTimeForm";
 import StopwatchPtTwo from "./StopwatchPtTwo";
+import Lottie from "lottie-react";
+import penguin from "../public/Lottie/penguin.json";
 
 export default function Projects({
   projects,
@@ -70,6 +72,7 @@ export default function Projects({
               <h2 color={project.textColour}>{project?.name}</h2>
             )}
           </div>
+          <Lottie animationData={penguin} loop={true} />
           <StopwatchPtTwo
             project={project}
             onAddTime={onAddTime}
