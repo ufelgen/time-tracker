@@ -4,7 +4,10 @@ export function determineTimeDifference(startTime, stopTime) {
   const stopTimeHours = stopTime.split(":")[0];
   const stopTimeMinutes = stopTime.split(":")[1];
 
-  if (stopTimeHours > startTimeHours && stopTimeMinutes > startTimeMinutes) {
+  if (
+    (stopTimeHours > startTimeHours && stopTimeMinutes > startTimeMinutes) ||
+    (stopTimeHours > startTimeHours && stopTimeMinutes === startTimeMinutes)
+  ) {
     const timeDifference =
       (stopTimeHours - startTimeHours) * 60 +
       (stopTimeMinutes - startTimeMinutes);

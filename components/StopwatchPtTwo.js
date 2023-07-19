@@ -164,6 +164,7 @@ export default function StopwatchPtTwo({
               name="description"
               id="description"
               placeholder="Beschreibung"
+              required
             />
             <button type="button" onClick={() => handleSaveEntryId(0)}>
               <BsFillArrowLeftCircleFill
