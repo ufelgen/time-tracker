@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  const [editId, setEditId] = useState("");
+  const [editId, setEditId] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const [newTimeForm, setNewTimeForm] = useState(0);
   const [editTimeId, setEditTimeId] = useState(0);

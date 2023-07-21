@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
 import { nanoid } from "nanoid";
 import {
@@ -8,8 +7,9 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillCheckCircleFill,
 } from "react-icons/bs";
-import format from "date-fns/format";
 import { determineTimeDifference } from "../helpers/timeCalculations";
+import { StopwatchContainer } from "./AllStyles";
+import { storeStart, storePause } from "../helpers/timeCalculations";
 
 export default function StopwatchPtTwo({
   project,
@@ -27,68 +27,9 @@ export default function StopwatchPtTwo({
     return null;
   }
 
-  function storeStart() {
-    if (running[0]) {
-      alert(
-        "Es läuft bereits ein Timer in einem anderen Projekt. Bitte pausiere oder stoppe diesen, bevor du einen neuen Timer startest."
-      );
-    } else {
-      const now = format(new Date(), "HH:mm");
-      const projectInStartStopArray = startStopArray.find(
-        (object) => object.id === project.id
-      );
-
-      if (projectInStartStopArray) {
-        setStartStopArray(
-          startStopArray.map((object) =>
-            object.id === project.id
-              ? { ...object, array: [...object.array, now] }
-              : object
-          )
-        );
-      } else {
-        setStartStopArray([
-          ...startStopArray,
-          { id: project.id, array: [now] },
-        ]);
-      }
-
-      setRunning([...running, project.id]);
-    }
-  }
-
-  function storePause() {
-    const now = format(new Date(), "HH:mm");
-    const projectInStartStopArray = startStopArray.find(
-      (object) => object.id === project.id
-    );
-
-    const arrayLength = projectInStartStopArray.array.length;
-
-    const newTimePair = {
-      start: projectInStartStopArray.array[arrayLength - 1],
-      stop: now,
-    };
-
-    const shortenedArray = projectInStartStopArray.array.slice(
-      0,
-      arrayLength - 1
-    );
-
-    setStartStopArray(
-      startStopArray.map((object) =>
-        object.id === project.id
-          ? { ...object, array: [...shortenedArray, newTimePair] }
-          : object
-      )
-    );
-
-    setRunning(running.filter((id) => id !== project.id));
-  }
-
   function storeStop(id) {
     handleSaveEntryId(id);
-    storePause();
+    storePause(setStartStopArray, setRunning, startStopArray, running, project);
   }
 
   function handleSaveEntry(event, project) {
@@ -183,7 +124,15 @@ export default function StopwatchPtTwo({
           <>
             <button
               type="button"
-              onClick={storePause}
+              onClick={() =>
+                storePause(
+                  setStartStopArray,
+                  setRunning,
+                  startStopArray,
+                  running,
+                  project
+                )
+              }
               disabled={!running.includes(project.id)}
             >
               <BsPauseCircleFill
@@ -195,7 +144,15 @@ export default function StopwatchPtTwo({
             </button>
             <button
               type="button"
-              onClick={storeStart}
+              onClick={() =>
+                storeStart(
+                  setStartStopArray,
+                  setRunning,
+                  startStopArray,
+                  running,
+                  project
+                )
+              }
               disabled={running.includes(project.id)}
             >
               <BsFillPlayCircleFill
@@ -225,32 +182,3 @@ export default function StopwatchPtTwo({
     </StopwatchContainer>
   );
 }
-
-const StopwatchContainer = styled.div`
-  height: 100%;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0 0 1rem 0;
-  z-index: 3;
-
-  button {
-    background-color: transparent;
-    border: none;
-    &.disabledButton {
-      color: grey;
-    }
-  }
-
-  div {
-    height: auto;
-    width: auto;
-  }
-
-  span {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-`;

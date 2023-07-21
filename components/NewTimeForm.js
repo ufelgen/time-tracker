@@ -1,9 +1,9 @@
-import styled from "styled-components";
 import {
   BsFillCheckCircleFill,
   BsFillArrowLeftCircleFill,
 } from "react-icons/bs";
 import { nanoid } from "nanoid";
+import { AddTimeManuallyForm } from "./AllStyles";
 
 export default function NewTimeForm({
   project,
@@ -17,7 +17,7 @@ export default function NewTimeForm({
   const timeHours = ("0" + Math.floor((time.time / 3600000) % 60)).slice(-2);
   const timeMinutes = ("0" + Math.floor((time.time / 60000) % 60)).slice(-2);
 
-  function addTimeManually(event, project) {
+  function addTimeManually(event) {
     event.preventDefault();
     const hours = event.target.elements.hours.value;
     const minutes = event.target.elements.minutes.value;
@@ -42,11 +42,12 @@ export default function NewTimeForm({
   }
 
   function returnFromForm() {
-    onShowNewTimeForm(false);
+    onShowNewTimeForm(0);
     onChangeEditTimeId(0);
   }
+
   return (
-    <AddTimeManuallyForm onSubmit={(event) => addTimeManually(event, project)}>
+    <AddTimeManuallyForm onSubmit={(event) => addTimeManually(event)}>
       <label htmlFor="description">Beschreibung: </label>
       <input
         name="description"
@@ -86,15 +87,3 @@ export default function NewTimeForm({
     </AddTimeManuallyForm>
   );
 }
-
-const AddTimeManuallyForm = styled.form`
-  width: 90%;
-  display: grid;
-
-  button {
-    height: 5vh;
-    background-color: transparent;
-    border: none;
-    margin: 5px;
-  }
-`;

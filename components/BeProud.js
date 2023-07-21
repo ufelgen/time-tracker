@@ -1,33 +1,9 @@
-import styled from "styled-components";
+import { StyledMessage } from "./AllStyles";
 
 export default function BeProud() {
   return (
-    <StyledDiv>
+    <StyledMessage>
       <p>Du hast es geschafft!</p>
-    </StyledDiv>
+    </StyledMessage>
   );
 }
-
-const StyledDiv = styled.div`
-  position: absolute;
-  height: auto;
-  width: 100vw;
-  top: 30vh;
-  /*   left: 10vw;
-
-  @media (min-width: 500px) {
-    left: auto;
-  } */
-
-  background-color: lightgoldenrodyellow;
-  color: var(--primary);
-  font-weight: bold;
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem;
-
-  z-index: 10;
-`;

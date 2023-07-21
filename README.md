@@ -1,34 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Time Tracker
 
-## Getting Started
+This webapp was written to keep track of how much time was spent working on specific projects.
 
-First, run the development server:
+Features:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- The user can create colour-coded projects and start timers in those projects
+- Timers can be paused and restarted as needed
+- Stopping a timer lets the user describe their task, the app will then display the description and total time worked on this task
+- Only one timer can be running at any time, but pausing a timer gives the user the option to start another one
+- Running timers are easily distinguishable by an animation
+- Clicking the "end of day" button gives the user an overview over their projects, tasks and times
+- Confirming this list deletes tasks and times but keeps projects for the next day
+- All data is stored in local storage, no log-in is needed
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Setup
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone this repository
+2. Inside root folder install all dependencies via `npm install`
+3. Run app in development mode via `npm run dev`
