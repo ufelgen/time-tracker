@@ -63,6 +63,8 @@ export default function NewTimeForm({
         id="hours"
         placeholder="HH"
         defaultValue={timeHours}
+        min={0}
+        max={24}
         required
       />
       <input
@@ -71,6 +73,8 @@ export default function NewTimeForm({
         id="minutes"
         placeholder="MM"
         defaultValue={timeMinutes}
+        min={0}
+        max={59}
         required
       />
       <div>
