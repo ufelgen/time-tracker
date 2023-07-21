@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state/src/useLocalStorageState";
 import { BaseMain } from "../../components/AllStyles";
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -8,6 +7,10 @@ import BeProud from "../../components/BeProud";
 import Overview from "../../components/Overview";
 import format from "date-fns/format";
 import dynamic from "next/dynamic";
+import {
+  StyledFixedButton,
+  StyledFinishButton,
+} from "../../components/AllStyles";
 
 export default function Timer({
   editId,
@@ -209,25 +212,3 @@ export default function Timer({
     </BaseMain>
   );
 }
-
-const StyledFixedButton = styled.button`
-  background-color: transparent;
-  color: var(--primary);
-  font-size: 7.7vh;
-  position: absolute;
-  bottom: 2vh;
-  right: 1rem;
-  border: none;
-  z-index: 5;
-`;
-
-const StyledFinishButton = styled(StyledFixedButton)`
-  left: 1rem;
-  right: auto;
-  font-size: 3vh;
-  background-color: var(--primary);
-  color: white;
-  padding: 1rem;
-  border-radius: 5px;
-  bottom: 3vh;
-`;

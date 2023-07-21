@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { IoMdTrash } from "react-icons/io";
 import { BiEdit } from "react-icons/bi";
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -7,6 +6,11 @@ import NewTimeForm from "./NewTimeForm";
 import StopwatchPtTwo from "./StopwatchPtTwo";
 import Lottie from "lottie-react";
 import penguin from "../public/Lottie/penguin.json";
+import {
+  ProjectsContainer,
+  EditNameForm,
+  AnimationContainer,
+} from "./AllStyles";
 
 export default function Projects({
   projects,
@@ -54,20 +58,18 @@ export default function Projects({
               <EditNameForm
                 onSubmit={(event) => handleEditProject(event, project.id)}
               >
-                <>
-                  <label htmlFor="projectName"></label>
-                  <input
-                    name="projectName"
-                    id="projectName"
-                    defaultValue={project.name}
+                <label htmlFor="projectName"></label>
+                <input
+                  name="projectName"
+                  id="projectName"
+                  defaultValue={project.name}
+                />
+                <button type="submit">
+                  <BsFillCheckCircleFill
+                    fontSize="5vh"
+                    color={project.textColour}
                   />
-                  <button type="submit">
-                    <BsFillCheckCircleFill
-                      fontSize="5vh"
-                      color={project.textColour}
-                    />
-                  </button>
-                </>
+                </button>
               </EditNameForm>
             ) : (
               <h2 color={project.textColour}>{project?.name}</h2>
@@ -87,17 +89,15 @@ export default function Projects({
           {project.times.map((time) => (
             <div key={time.id}>
               {time.id === editTimeId ? (
-                <>
-                  <NewTimeForm
-                    project={project}
-                    onAddTime={onAddTime}
-                    onShowNewTimeForm={onShowNewTimeForm}
-                    time={time}
-                    onChangeEditTimeId={onChangeEditTimeId}
-                    onEditTime={onEditTime}
-                    editTimeId={editTimeId}
-                  />
-                </>
+                <NewTimeForm
+                  project={project}
+                  onAddTime={onAddTime}
+                  onShowNewTimeForm={onShowNewTimeForm}
+                  time={time}
+                  onChangeEditTimeId={onChangeEditTimeId}
+                  onEditTime={onEditTime}
+                  editTimeId={editTimeId}
+                />
               ) : (
                 <>
                   <span>{time.description}: </span>
@@ -157,80 +157,3 @@ export default function Projects({
     </ProjectsContainer>
   );
 }
-
-const ProjectsContainer = styled.section`
-  position: fixed;
-  top: 1vh;
-  bottom: 20vh;
-  overflow-y: scroll;
-  width: 100%;
-
-  article {
-    width: 90%;
-    margin-bottom: 1rem !important;
-    border-radius: 5px;
-    padding: 1rem;
-    position: relative;
-
-    h2 {
-      padding: 0.5rem;
-    }
-
-    div {
-      span {
-        button {
-          background-color: transparent;
-          border: none;
-          margin: 5px;
-        }
-      }
-    }
-  }
-
-  .fixedHeigt {
-    height: 4rem;
-  }
-
-  section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    padding-top: 1rem;
-
-    button {
-      height: 5vh;
-      background-color: transparent;
-      border: none;
-      margin: 5px;
-    }
-  }
-`;
-
-const EditNameForm = styled.form`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 0.5rem;
-
-  input {
-    height: 5vh;
-  }
-
-  button {
-    background-color: transparent;
-    border: none;
-    margin: 5px;
-  }
-`;
-
-const AnimationContainer = styled.div`
-  position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
-  height: 7rem;
-  width: 7rem;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-`;
