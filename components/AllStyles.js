@@ -138,7 +138,7 @@ export const OverviewPopup = styled.div`
     height: 5vh;
     background-color: transparent;
     border: none;
-    margin: 5px;
+    padding: 1rem 0.5rem;
     color: var(--primary);
   }
 `;

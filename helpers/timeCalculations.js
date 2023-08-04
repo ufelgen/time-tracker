@@ -111,3 +111,32 @@ export function storePause(
     setterTwo(running.filter((id) => id !== project.id));
   }
 }
+
+function addTimesHelper(array) {
+  let totalTimeInMilliseconds = 0;
+
+  for (let i = 0; i < array.length; i++) {
+    totalTimeInMilliseconds += array[i];
+  }
+
+  return totalTimeInMilliseconds;
+}
+
+export function addTimesInProjects(projects) {
+  const projectsWithAllTimes = projects.map((project) => {
+    return { ...project, times: project.times.map((time) => time.time) };
+  });
+
+  const projectsWithAddedTimes = projectsWithAllTimes.map((project) => {
+    return { ...project, times: addTimesHelper(project.times) };
+  });
+  return projectsWithAddedTimes;
+}
+
+export function addAllTimesPerDay(projectsWithAddedTimes) {
+  const arrayWithJustTimes = projectsWithAddedTimes.map(
+    (project) => project.times
+  );
+  const totalTime = addTimesHelper(arrayWithJustTimes);
+  return totalTime;
+}
