@@ -53,6 +53,13 @@ export const StyledForm = styled.form`
   }
 `;
 
+export const SaveTimeForm = styled.form`
+  display: flex;
+  input {
+    width: 70%;
+  }
+`;
+
 export const AddTimeManuallyForm = styled.form`
   width: 90%;
   display: grid;

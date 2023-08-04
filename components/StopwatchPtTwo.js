@@ -13,7 +13,7 @@ import {
   storePause,
   determineTimeDifferenceNew,
 } from "../helpers/timeCalculations";
-import { StopwatchContainer } from "./AllStyles";
+import { StopwatchContainer, SaveTimeForm } from "./AllStyles";
 
 export default function StopwatchPtTwo({
   project,
@@ -104,7 +104,7 @@ export default function StopwatchPtTwo({
     <StopwatchContainer>
       <div>
         {saveEntry === project.id ? (
-          <form onSubmit={(event) => handleSaveEntry(event, project)}>
+          <SaveTimeForm onSubmit={(event) => handleSaveEntry(event, project)}>
             <label htmlFor="description"></label>
             <input
               name="description"
@@ -124,7 +124,7 @@ export default function StopwatchPtTwo({
                 color={project.textColour}
               />
             </button>
-          </form>
+          </SaveTimeForm>
         ) : (
           <>
             <button
