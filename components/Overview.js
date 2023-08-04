@@ -15,7 +15,6 @@ export default function Overview({ finishDay, toggleShowOverview }) {
     return null;
   }
 
-  console.log(addTimesInProjects(projects));
   const projectsWithAddedTimes = addTimesInProjects(projects);
   const totalTime = addAllTimesPerDay(projectsWithAddedTimes);
 

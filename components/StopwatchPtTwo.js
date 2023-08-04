@@ -8,7 +8,6 @@ import {
   BsFillCheckCircleFill,
 } from "react-icons/bs";
 import {
-  //determineTimeDifference,
   storeStart,
   storePause,
   determineTimeDifferenceNew,
@@ -46,14 +45,11 @@ export default function StopwatchPtTwo({
     const totalTimeArray = projectInStartStopArray.array.map((time) =>
       determineTimeDifferenceNew(time.start, time.stop)
     );
-    let totalTimeInMinutes = 0;
+    let totalTimeInMilliseconds = 0;
 
     for (let i = 0; i < totalTimeArray.length; i++) {
-      totalTimeInMinutes += totalTimeArray[i];
+      totalTimeInMilliseconds += totalTimeArray[i];
     }
-
-    //const totalTimeInMilliseconds = totalTimeInMinutes * 60000;
-    const totalTimeInMilliseconds = totalTimeInMinutes;
 
     const newEntry = {
       projectName: project.name,

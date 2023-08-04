@@ -1,5 +1,3 @@
-//import format from "date-fns/format";
-
 export function determineType(timeArray) {
   if (timeArray === undefined) {
     const type = "empty";
@@ -11,18 +9,6 @@ export function determineType(timeArray) {
     return type;
   }
 }
-
-/* export function determineTimeDifference(startTime, stopTime) {
-  const startTimeHours = startTime.split(":")[0];
-  const startTimeMinutes = startTime.split(":")[1];
-  const stopTimeHours = stopTime.split(":")[0];
-  const stopTimeMinutes = stopTime.split(":")[1];
-
-  const timeDifference =
-    (stopTimeHours - startTimeHours) * 60 +
-    (stopTimeMinutes - startTimeMinutes);
-  return timeDifference;
-} */
 
 export function determineTimeDifferenceNew(startTime, stopTime) {
   const differenceInMilliseconds =
@@ -37,7 +23,6 @@ export function storeStart(
   running,
   project
 ) {
-  //const now = format(new Date(), "HH:mm");
   const now = new Date();
   const projectInStartStopArray = startStopArray.find(
     (object) => object.id === project.id
@@ -76,7 +61,6 @@ export function storePause(
   running,
   project
 ) {
-  //const now = format(new Date(), "HH:mm");
   const now = new Date();
   const projectInStartStopArray = startStopArray.find(
     (object) => object.id === project.id
