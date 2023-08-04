@@ -1,4 +1,4 @@
-import format from "date-fns/format";
+//import format from "date-fns/format";
 
 export function determineType(timeArray) {
   if (timeArray === undefined) {
@@ -12,7 +12,7 @@ export function determineType(timeArray) {
   }
 }
 
-export function determineTimeDifference(startTime, stopTime) {
+/* export function determineTimeDifference(startTime, stopTime) {
   const startTimeHours = startTime.split(":")[0];
   const startTimeMinutes = startTime.split(":")[1];
   const stopTimeHours = stopTime.split(":")[0];
@@ -22,7 +22,7 @@ export function determineTimeDifference(startTime, stopTime) {
     (stopTimeHours - startTimeHours) * 60 +
     (stopTimeMinutes - startTimeMinutes);
   return timeDifference;
-}
+} */
 
 export function determineTimeDifferenceNew(startTime, stopTime) {
   const differenceInMilliseconds =
