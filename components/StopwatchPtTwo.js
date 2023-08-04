@@ -7,9 +7,13 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillCheckCircleFill,
 } from "react-icons/bs";
-import { determineTimeDifference } from "../helpers/timeCalculations";
+import {
+  determineTimeDifference,
+  storeStart,
+  storePause,
+  determineTimeDifferenceNew,
+} from "../helpers/timeCalculations";
 import { StopwatchContainer } from "./AllStyles";
-import { storeStart, storePause } from "../helpers/timeCalculations";
 
 export default function StopwatchPtTwo({
   project,
@@ -40,7 +44,7 @@ export default function StopwatchPtTwo({
     );
 
     const totalTimeArray = projectInStartStopArray.array.map((time) =>
-      determineTimeDifference(time.start, time.stop)
+      determineTimeDifferenceNew(time.start, time.stop)
     );
     let totalTimeInMinutes = 0;
 
@@ -48,7 +52,8 @@ export default function StopwatchPtTwo({
       totalTimeInMinutes += totalTimeArray[i];
     }
 
-    const totalTimeInMilliseconds = totalTimeInMinutes * 60000;
+    //const totalTimeInMilliseconds = totalTimeInMinutes * 60000;
+    const totalTimeInMilliseconds = totalTimeInMinutes;
 
     const newEntry = {
       projectName: project.name,
