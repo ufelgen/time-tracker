@@ -1,3 +1,5 @@
+//form component to add a new project (name and colour) to the 'projects' array
+
 import { nanoid } from "nanoid";
 import { StyledForm } from "./AllStyles";
 import {
@@ -6,6 +8,7 @@ import {
 } from "../helpers/evaluateColour";
 
 export default function NewProjectForm({ toggleShowForm, onAddNewProject }) {
+  //function to send the form's answers to the handleAddProject function within pages\timer\index.js
   function handleSubmit(event) {
     event.preventDefault();
 

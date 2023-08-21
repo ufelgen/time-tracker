@@ -1,3 +1,5 @@
+//central component which renders the stopwatch within the project
+
 import useLocalStorageState from "use-local-storage-state";
 import { nanoid } from "nanoid";
 import {
@@ -20,6 +22,7 @@ export default function StopwatchPtTwo({
   saveEntry,
   handleSaveEntryId,
 }) {
+  //'startStopArray' and 'running' arrays with corresponding setter functions are retrieved from local storage
   const [startStopArray, setStartStopArray] =
     useLocalStorageState("startStopArray");
   if (!startStopArray) {
@@ -30,11 +33,13 @@ export default function StopwatchPtTwo({
     return null;
   }
 
+  //function called upon clicking the timer's stop button: calls storePause to store the stop time in the startStopArray and also calls the function for saving the subtask in the correct array
   function storeStop(id) {
     handleSaveEntryId(id);
     storePause(setStartStopArray, setRunning, startStopArray, running, project);
   }
 
+  //hands the information for saving the new subtask's total time and description to the handleAddTime function within pages\timer\index.js
   function handleSaveEntry(event, project) {
     event.preventDefault();
 
@@ -67,6 +72,7 @@ export default function StopwatchPtTwo({
     );
   }
 
+  //determines timer status to display "timer running" or "timer paused" within a project
   function determineTimerStatus() {
     const projectInStartStopArray = startStopArray.find(
       (object) => object.id === project.id

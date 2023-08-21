@@ -1,3 +1,5 @@
+//component displaying an overview of the day including total times spent working within projects and overall
+
 import useLocalStorageState from "use-local-storage-state/src/useLocalStorageState";
 import {
   BsFillCheckCircleFill,

@@ -1,3 +1,5 @@
+//helper function to return a greeting based on the current time of day
+
 export function getGreeting() {
   if (new Date().getHours() >= 6 && new Date().getHours() < 12) {
     const greeting = "Guten Morgen";

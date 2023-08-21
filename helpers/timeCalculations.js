@@ -1,3 +1,6 @@
+//helper functions for time calculations and safety checks
+
+//safety check: determines type of last entity in array
 export function determineType(timeArray) {
   if (timeArray === undefined) {
     const type = "empty";
@@ -10,12 +13,14 @@ export function determineType(timeArray) {
   }
 }
 
+//time calculation for timer: determines the time difference in milliseconds between two time stamps
 export function determineTimeDifferenceNew(startTime, stopTime) {
   const differenceInMilliseconds =
     new Date(stopTime).getTime() - new Date(startTime).getTime();
   return differenceInMilliseconds;
 }
 
+//time calculation for timer: stores the time at which the timer is started at the end of the startStopArray
 export function storeStart(
   setterOne,
   setterTwo,
@@ -54,6 +59,7 @@ export function storeStart(
   }
 }
 
+//time calculation for timer: stores the pair of timer start time (taken from the end of the startStopArray) and timer pause time in an object within the startStopArray
 export function storePause(
   setterOne,
   setterTwo,
@@ -96,6 +102,7 @@ export function storePause(
   }
 }
 
+//time calculation for day overview: adds all times of subtasks within a project
 function addTimesHelper(array) {
   let totalTimeInMilliseconds = 0;
 
@@ -106,6 +113,7 @@ function addTimesHelper(array) {
   return totalTimeInMilliseconds;
 }
 
+//time calculation for day overview: returns projects array with project information and added times for all subtasks within the projects
 export function addTimesInProjects(projects) {
   const projectsWithAllTimes = projects.map((project) => {
     return { ...project, times: project.times.map((time) => time.time) };
@@ -117,6 +125,7 @@ export function addTimesInProjects(projects) {
   return projectsWithAddedTimes;
 }
 
+//time calculation for day overview: returns the total time worked in a day by adding all subtask times of all projects
 export function addAllTimesPerDay(projectsWithAddedTimes) {
   const arrayWithJustTimes = projectsWithAddedTimes.map(
     (project) => project.times

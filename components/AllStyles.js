@@ -1,3 +1,5 @@
+//style file which stores all styled components used throughout the app
+
 import styled from "styled-components";
 import { GiSandsOfTime } from "react-icons/gi";
 

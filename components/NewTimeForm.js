@@ -1,3 +1,5 @@
+//component used to either manually add a new subtask with time and description or edit an existing substask's time and/or description
+
 import {
   BsFillCheckCircleFill,
   BsFillArrowLeftCircleFill,
@@ -17,6 +19,8 @@ export default function NewTimeForm({
   const timeHours = ("0" + Math.floor((time.time / 3600000) % 60)).slice(-2);
   const timeMinutes = ("0" + Math.floor((time.time / 60000) % 60)).slice(-2);
 
+  //function to manually add a subtask with time and description within a project
+  //this function is reused for editing an existing subtask
   function addTimeManually(event) {
     event.preventDefault();
     const hours = event.target.elements.hours.value;
