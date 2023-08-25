@@ -37,6 +37,7 @@ export default function NewProjectForm({ toggleShowForm, onAddNewProject }) {
         name="projectName"
         id="projectName"
         placeholder="Neues Projekt"
+        autoFocus
         required
       />
       <label htmlFor="projectColour"></label>
