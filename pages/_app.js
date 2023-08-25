@@ -3,6 +3,10 @@ import useLocalStorageState from "use-local-storage-state";
 import { useState } from "react";
 
 function MyApp({ Component, pageProps }) {
+  //three arrays are stored in the browser's local storage via the useLocalStorageState React library:
+  //the 'projects' array contains all the information that is displayed: projects are stored in objects with information about their name, colour, and different tasks with accompanying time (in milliseconds) and descriptions
+  //the 'startStopArray' array is continually added to while a timer is running and paused. for this, it temporarily stores the times at which the timer is started, paused or stopped. upon finishing a subtask by stopping the timer and adding a description, this array is cleared.
+  //the 'running' array stores the ID of the project in which a timer is currently running and is cleared when the timer is paused or stopped.
   const [projects, setProjects] = useLocalStorageState("projects", {
     defaultValue: [],
   });
@@ -11,10 +15,12 @@ function MyApp({ Component, pageProps }) {
     "startStopArray",
     { defaultValue: [] }
   );
+
   const [running, setRunning] = useLocalStorageState("running", {
     defaultValue: [],
   });
 
+  //states needed for app logic are stored temporarily via the useState React hook.
   const [editId, setEditId] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const [newTimeForm, setNewTimeForm] = useState(0);
@@ -23,6 +29,7 @@ function MyApp({ Component, pageProps }) {
   const [saveEntry, setSaveEntry] = useState(0);
   const [showOverview, setShowOverview] = useState(false);
 
+  //setter functions should not be handed down to components, therefore new functions making use of the setters are defined here
   function handleChangeEditId(editId) {
     setEditId(editId);
   }

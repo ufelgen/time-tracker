@@ -1,3 +1,5 @@
+//central component which renders the stopwatch within the project
+
 import useLocalStorageState from "use-local-storage-state";
 import { nanoid } from "nanoid";
 import {
@@ -7,9 +9,12 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillCheckCircleFill,
 } from "react-icons/bs";
-import { determineTimeDifference } from "../helpers/timeCalculations";
-import { StopwatchContainer } from "./AllStyles";
-import { storeStart, storePause } from "../helpers/timeCalculations";
+import {
+  storeStart,
+  storePause,
+  determineTimeDifferenceNew,
+} from "../helpers/timeCalculations";
+import { StopwatchContainer, SaveTimeForm } from "./AllStyles";
 
 export default function StopwatchPtTwo({
   project,
@@ -17,6 +22,7 @@ export default function StopwatchPtTwo({
   saveEntry,
   handleSaveEntryId,
 }) {
+  //'startStopArray' and 'running' arrays with corresponding setter functions are retrieved from local storage
   const [startStopArray, setStartStopArray] =
     useLocalStorageState("startStopArray");
   if (!startStopArray) {
@@ -27,11 +33,13 @@ export default function StopwatchPtTwo({
     return null;
   }
 
+  //function called upon clicking the timer's stop button: calls storePause to store the stop time in the startStopArray and also calls the function for saving the subtask in the correct array
   function storeStop(id) {
     handleSaveEntryId(id);
     storePause(setStartStopArray, setRunning, startStopArray, running, project);
   }
 
+  //hands the information for saving the new subtask's total time and description to the handleAddTime function within pages\timer\index.js
   function handleSaveEntry(event, project) {
     event.preventDefault();
 
@@ -40,15 +48,13 @@ export default function StopwatchPtTwo({
     );
 
     const totalTimeArray = projectInStartStopArray.array.map((time) =>
-      determineTimeDifference(time.start, time.stop)
+      determineTimeDifferenceNew(time.start, time.stop)
     );
-    let totalTimeInMinutes = 0;
+    let totalTimeInMilliseconds = 0;
 
     for (let i = 0; i < totalTimeArray.length; i++) {
-      totalTimeInMinutes += totalTimeArray[i];
+      totalTimeInMilliseconds += totalTimeArray[i];
     }
-
-    const totalTimeInMilliseconds = totalTimeInMinutes * 60000;
 
     const newEntry = {
       projectName: project.name,
@@ -66,6 +72,7 @@ export default function StopwatchPtTwo({
     );
   }
 
+  //determines timer status to display "timer running" or "timer paused" within a project
   function determineTimerStatus() {
     const projectInStartStopArray = startStopArray.find(
       (object) => object.id === project.id
@@ -99,7 +106,7 @@ export default function StopwatchPtTwo({
     <StopwatchContainer>
       <div>
         {saveEntry === project.id ? (
-          <form onSubmit={(event) => handleSaveEntry(event, project)}>
+          <SaveTimeForm onSubmit={(event) => handleSaveEntry(event, project)}>
             <label htmlFor="description"></label>
             <input
               name="description"
@@ -119,7 +126,7 @@ export default function StopwatchPtTwo({
                 color={project.textColour}
               />
             </button>
-          </form>
+          </SaveTimeForm>
         ) : (
           <>
             <button

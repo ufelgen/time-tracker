@@ -1,3 +1,5 @@
+//component displaying a random image from an unsplash collection to greet the user
+
 import Image from "next/image";
 import { StyledImagePage, StyledImageContainer } from "./AllStyles";
 

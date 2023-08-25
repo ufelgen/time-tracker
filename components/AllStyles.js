@@ -1,3 +1,5 @@
+//style file which stores all styled components used throughout the app
+
 import styled from "styled-components";
 import { GiSandsOfTime } from "react-icons/gi";
 
@@ -50,6 +52,13 @@ export const StyledForm = styled.form`
     border-radius: 5px;
     padding: 0.5rem;
     margin: 0.5rem !important;
+  }
+`;
+
+export const SaveTimeForm = styled.form`
+  display: flex;
+  input {
+    width: 70%;
   }
 `;
 
@@ -131,7 +140,7 @@ export const OverviewPopup = styled.div`
     height: 5vh;
     background-color: transparent;
     border: none;
-    margin: 5px;
+    padding: 1rem 0.5rem;
     color: var(--primary);
   }
 `;

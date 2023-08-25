@@ -1,3 +1,5 @@
+//central component which renders the different projects with timer and subtasks
+
 import { IoMdTrash } from "react-icons/io";
 import { BiEdit } from "react-icons/bi";
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -34,6 +36,7 @@ export default function Projects({
     return null;
   }
 
+  //function which sends the updated project name to the handleUpdateProjectName function within pages\timer\index.js
   function handleEditProject(event, projectId) {
     event.preventDefault();
 

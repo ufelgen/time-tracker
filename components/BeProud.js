@@ -1,3 +1,5 @@
+//component displaying an encouraging message at the end of the work day
+
 import { StyledMessage } from "./AllStyles";
 
 export default function BeProud() {

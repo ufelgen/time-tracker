@@ -1,3 +1,5 @@
+//this is the time tracker page
+
 import useLocalStorageState from "use-local-storage-state/src/useLocalStorageState";
 import { BaseMain } from "../../components/AllStyles";
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -41,6 +43,7 @@ export default function Timer({
 
   const today = format(new Date(), "dd. MM. yyyy");
 
+  //functions to add, delete and edit a project in the 'projects' array
   function handleAddProject(newProject) {
     setProjects([...projects, newProject]);
   }
@@ -60,6 +63,7 @@ export default function Timer({
     );
   }
 
+  //functions to add, delete and edit a task's time and/or description within the times array of the 'projects' array
   function handleAddTime(newEntry) {
     const projectEntryToUpdate = projects.find(
       (project) => project.name === newEntry.projectName
@@ -117,6 +121,7 @@ export default function Timer({
     );
   }
 
+  //function to finish for the day which upon the user's confirmation clears times from projects while keeping project names and colours and displays the day overview
   function finishDay() {
     const confirmation = confirm(
       "Möchtest du deinen Arbeitstag abschließen? Dies löscht alle Zeiten aus deinen Projekten!"
@@ -141,6 +146,7 @@ export default function Timer({
     toggleShowOverview();
   }
 
+  //needed to avoid server side rendering of confetti component, which needs the viewport's height and width to be displayed correctly
   const { height, width } = dynamic(
     () => import("../../helpers/useWindowSize"),
     {
@@ -152,6 +158,7 @@ export default function Timer({
     ssr: false,
   });
 
+  //functions to display confetti when the day is finished for 5 seconds only
   function handleCelebration() {
     setCelebration(true);
     setTimeout(handleConfettiStop, 5000);

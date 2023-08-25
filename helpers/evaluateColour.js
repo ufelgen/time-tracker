@@ -1,6 +1,8 @@
-export function determineLuminance(colourHex) {
-  // ref https://css-tricks.com/converting-color-spaces-in-javascript/
+//helper functions to set the text colour within colour-coded projects
 
+//determines the luminance of the project's chosen colour
+//adapted from: https://css-tricks.com/converting-color-spaces-in-javascript/
+export function determineLuminance(colourHex) {
   // Convert hex to RGB first
   let r = 0,
     g = 0,
@@ -43,6 +45,7 @@ export function determineLuminance(colourHex) {
   return l < 50;
 }
 
+//determines if the chosen colour is too dark, in which case the text colour will be set to white, while otherwise being set to black
 export function determineTextColour(tooDark) {
   if (tooDark) {
     const textColour = "white";
