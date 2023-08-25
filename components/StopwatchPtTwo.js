@@ -112,6 +112,7 @@ export default function StopwatchPtTwo({
               name="description"
               id="description"
               placeholder="Beschreibung"
+              autoFocus
               required
             />
             <button type="button" onClick={() => handleSaveEntryId(0)}>

@@ -5,7 +5,7 @@ import {
   BsFillCheckCircleFill,
   BsFillArrowLeftCircleFill,
 } from "react-icons/bs";
-import { OverviewPopup } from "./AllStyles";
+import { OverviewPopup, StyledWarning, ProjectSpan } from "./AllStyles";
 import {
   addTimesInProjects,
   addAllTimesPerDay,
@@ -17,14 +17,22 @@ export default function Overview({ finishDay, toggleShowOverview }) {
     return null;
   }
 
+  const [startStopArray] = useLocalStorageState("startStopArray");
+  if (!startStopArray) {
+    return null;
+  }
+
   const projectsWithAddedTimes = addTimesInProjects(projects);
   const totalTime = addAllTimesPerDay(projectsWithAddedTimes);
 
   return (
     <OverviewPopup>
+      {startStopArray[0] && (
+        <StyledWarning>Ein Timer läuft noch oder ist pausiert.</StyledWarning>
+      )}
       {projectsWithAddedTimes.map((project) => (
         <div key={project.id}>
-          <span>{project.name}: </span>
+          <ProjectSpan>{project.name}: </ProjectSpan>
           <span>
             {("0" + Math.floor((project.times / 3600000) % 60)).slice(-2)}:
           </span>
@@ -34,7 +42,7 @@ export default function Overview({ finishDay, toggleShowOverview }) {
         </div>
       ))}
       <div>
-        <span>Gesamte Arbeitszeit: </span>
+        <ProjectSpan>Gesamte Arbeitszeit: </ProjectSpan>
         <span>{("0" + Math.floor((totalTime / 3600000) % 60)).slice(-2)}:</span>
         <span>{("0" + Math.floor((totalTime / 60000) % 60)).slice(-2)}</span>
       </div>
@@ -46,6 +54,10 @@ export default function Overview({ finishDay, toggleShowOverview }) {
           <BsFillCheckCircleFill fontSize="5vh" />
         </button>
       </div>
+      <StyledWarning>
+        Achtung: Wenn du auf den Haken zum Bestätigen klickst, werden alle
+        Zeiten aus deinen Projekten gelöscht!
+      </StyledWarning>
     </OverviewPopup>
   );
 }

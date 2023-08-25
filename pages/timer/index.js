@@ -121,20 +121,14 @@ export default function Timer({
     );
   }
 
-  //function to finish for the day which upon the user's confirmation clears times from projects while keeping project names and colours and displays the day overview
+  //function to finish for the day which clears times from projects while keeping project names and colours and displays the day overview
   function finishDay() {
-    const confirmation = confirm(
-      "Möchtest du deinen Arbeitstag abschließen? Dies löscht alle Zeiten aus deinen Projekten!"
+    setProjects(
+      projects.map((project) => {
+        return { ...project, times: [] };
+      })
     );
-
-    if (confirmation) {
-      setProjects(
-        projects.map((project) => {
-          return { ...project, times: [] };
-        })
-      );
-      handleCelebration();
-    }
+    handleCelebration();
 
     if (showForm) {
       toggleShowForm();

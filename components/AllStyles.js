@@ -300,3 +300,13 @@ export const StyledFinishButton = styled(StyledFixedButton)`
   border-radius: 5px;
   bottom: 3vh;
 `;
+
+export const StyledWarning = styled.div`
+  font-weight: bold;
+  color: red;
+  padding: 0.5 rem;
+`;
+
+export const ProjectSpan = styled.span`
+  font-weight: bold;
+`;
