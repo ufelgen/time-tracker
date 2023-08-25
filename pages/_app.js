@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  //states needed for app logic are stored temporarily via the useState React hook. every state change leads to a re-render.
+  //states needed for app logic are stored temporarily via the useState React hook.
   const [editId, setEditId] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const [newTimeForm, setNewTimeForm] = useState(0);
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
   const [saveEntry, setSaveEntry] = useState(0);
   const [showOverview, setShowOverview] = useState(false);
 
-  //setter functions should not be handed down to components, therefore new functions making use of the setters are defined here in the _app.js
+  //setter functions should not be handed down to components, therefore new functions making use of the setters are defined here
   function handleChangeEditId(editId) {
     setEditId(editId);
   }

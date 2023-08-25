@@ -1,4 +1,4 @@
-//component used to either manually add a new subtask with time and description or edit an existing substask's time and/or description
+//component used to either manually add a new subtask with time and description or edit an existing subtask's time and/or description
 
 import {
   BsFillCheckCircleFill,
